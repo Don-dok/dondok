@@ -1,46 +1,85 @@
-import React, { useEffect } from 'react';
-import { Calendar, Badge } from 'antd'
+import React, { useEffect, useState } from 'react';
+import { Calendar } from 'antd'
 import styled from 'styled-components'
-import { postSpending,getSpendingCalendar, lookupByDate } from '../../api/requests';
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        {
-          type: 'warning',
-          content: '6,000',
-        },
+import { lookupByDate, getSpendingCalendar } from '../../api/requests';
+import { formatPrice, formatDate } from '../../utils/format';
 
-      ];
-      break;
-    case 10:
-      listData = [
-        {
-          type: 'warning',
-          content: '100',
-        },
-      ];
-      break;
-    case 15:
-      listData = [
-        {
-          type: 'warning',
-          content: '1,000',
-        }
-      ];
-      break;
-    default:
-  }
-  return listData || [];
-};
-const getMonthData = (value) => {
-  if (value.month() === 8) {
-    return 1394;
-  }
-};
+
+
 
 const TheCalendar = () => {
+  // getSpendingCalendar API 응답 데이터
+const [spending, setSpending] = useState({});
+// getSpendingCalendar API에 필요한 인수 (기본값: 오늘 날짜)
+const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/').map(Number));
+
+
+
+  // 소비 달력 조회 API 호출
+  const getSpending = async() => {
+    try {
+      const res = await getSpendingCalendar(selectedDate[0], selectedDate[1], 'Team2');
+      setSpending(res);
+      console.log('소비달력핸들러',res);
+    } catch (error) {
+      console.log('소비달력실패', error)
+    }
+  }
+
+  // 랜더링 시 API 호출
+  useEffect(()=>{
+    getSpending();
+    lookupByDate('weekly');
+  },[])
+
+  // Calendar 컴포넌트에 출력될 데이터 API (antd)
+  const cellRender = (value, info) => {
+    if (info.type === 'date') return dateCellRender(value);
+    if (info.type === 'month') return monthCellRender(value);
+    return info.originNode;
+  };
+
+
+  // 날짜별 지출 합계 구하기
+  const getListData = () => {
+    let spendingList = [];
+    // spending 객체 for in 반복문으로 각 key: value 접근
+    for (let key in spending) {
+      // formatDate 형식 (2023/7/10) date 구하기 
+        const spendingDate = formatDate(spending[key][0].date)
+        // 일 지출 합계
+        const sum = spending[key].reduce((acc, cur)=> acc += cur.amount,0)
+        // spendingList 배열에 객체 데이터 {2023/7/10, 2860106} 넣기
+        spendingList.push({spendingDate, sum})
+    }
+    return spendingList;
+  };
+  
+  // 일 지출 합계 출력 
+  const dateCellRender = (value) => {
+    const listData = getListData();
+    // listData 각 index에 접근
+    for (let i = 0; i < listData.length; i++) {
+      // listData와 value 날짜 비교
+      if (listData[i].spendingDate ===formatDate(value)) {
+        return <p 
+          style={{
+            fontSize: 8, 
+            marginTop: 16, 
+            color: '#fc037b', 
+            wordBreak:'break-all', // 너비보다 글자가 긴 경우, 줄바꿈
+            lineHeight: 1,
+          }}>₩ {formatPrice(listData[i].sum)}</p>
+      }
+    }
+  };
+
+  const getMonthData = (value) => {
+    if (value.month() === 7) {
+      return 1394;
+    }
+  };
+  
   const monthCellRender = (value) => {
     const num = getMonthData(value);
     return num ? (
@@ -50,33 +89,15 @@ const TheCalendar = () => {
       </div>
     ) : null;
   };
-  const dateCellRender = (value) => {
-    const listData = getListData(value);
-    return (
-      <ul className="events">
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
-          </li>
-        ))}
-      </ul>
-    );
-  };
-  const cellRender = (current, info) => {
-    if (info.type === 'date') return dateCellRender(current);
-    if (info.type === 'month') return monthCellRender(current);
-    return info.originNode;
-  };
 
-  useEffect(()=>{
-    lookupByDate('daily', 'Team2')
-    getSpendingCalendar(2, 2, 'Team2');
-
-  },[])
   return (
   <Container>
-    <StyledCalender cellRender={cellRender}/>
-    <button onClick={()=>postSpending()}>등록test</button>
+    <StyledCalender 
+      cellRender={cellRender}
+      onSelect={(date)=> { 
+        setSelectedDate(formatDate(date).split('/'))
+      }}
+      />
   </Container>
   )
 };
@@ -93,13 +114,14 @@ const Container = styled.div`
 
 `
 const StyledCalender = styled(Calendar)`
-  width: 390px;
+  width: 420px;
   height: 40%;
   font-size: 12px;
 
   .ant-picker-calendar-header {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .ant-picker-cell-inner.ant-picker-calendar-date{
@@ -113,7 +135,9 @@ const StyledCalender = styled(Calendar)`
   }
   .ant-picker-calendar-date-content {
     height: 50px;
- 
+    display: flex;
+    justify-content: center;
+
   }
   .events {
     margin: 0;
@@ -132,4 +156,10 @@ const StyledCalender = styled(Calendar)`
   font-family: Times, Times New Roman, Georgia, serif;
   margin-top: 5px;
   }
+
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+    border-color: #35495e;
+  }
+
 `
+
