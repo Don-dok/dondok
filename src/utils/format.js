@@ -10,7 +10,7 @@ const formatDate = (date) => {
   const month = new Date(date).getMonth() + 1;
   const day = new Date(date).getDate();
 
-  return `${year}/${month}/${day}`
+  return `${year}-${month}-${day}`
 }
 
 export {formatPrice, formatDate}
