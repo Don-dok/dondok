@@ -10,8 +10,10 @@ import { formatPrice, formatDate } from '../../utils/format';
 const TheCalendar = () => {
   // getSpendingCalendar API 응답 데이터
 const [spending, setSpending] = useState({});
-// getSpendingCalendar API에 필요한 인수 (기본값: 오늘 날짜)
-const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/').map(Number));
+// getSpendingCalendar API에 필요한 인수 - 기본값: 오늘 날짜 [2023, 7, 11]
+const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('-').map(Number));
+// 월별 조회 API 응답데이터
+const [monthlySpending, setMonthlySpending] = useState()
 
 
 
@@ -26,10 +28,21 @@ const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/
     }
   }
 
+  // 일별, 주별, 월별 조회
+  const getMonthlyData = async() => {
+    try {
+      const res = await lookupByDate('monthly');
+      setMonthlySpending(res);
+      console.log('월별 조회 성공', res);
+    } catch (error) {
+      console.log('월별 조회 실패', error);
+    }
+  }
+
   // 랜더링 시 API 호출
   useEffect(()=>{
     getSpending();
-    lookupByDate('weekly');
+    getMonthlyData();
   },[])
 
   // Calendar 컴포넌트에 출력될 데이터 API (antd)
@@ -39,13 +52,12 @@ const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/
     return info.originNode;
   };
 
-
-  // 날짜별 지출 합계 구하기
+  // 일별 지출 합계 데이터
   const getListData = () => {
     let spendingList = [];
     // spending 객체 for in 반복문으로 각 key: value 접근
     for (let key in spending) {
-      // formatDate 형식 (2023/7/10) date 구하기 
+      // formatDate 형식 (2023-7-10)으로 날짜 구하기 
         const spendingDate = formatDate(spending[key][0].date)
         // 일 지출 합계
         const sum = spending[key].reduce((acc, cur)=> acc += cur.amount,0)
@@ -55,13 +67,14 @@ const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/
     return spendingList;
   };
   
-  // 일 지출 합계 출력 
+  // 일 지출 합계 조회 API (antd)
   const dateCellRender = (value) => {
     const listData = getListData();
-    // listData 각 index에 접근
+    // for 반복문 index에 접근
     for (let i = 0; i < listData.length; i++) {
-      // listData와 value 날짜 비교
+      // listData의 spendingDate와 value(날짜)비교
       if (listData[i].spendingDate ===formatDate(value)) {
+        // value 와 같은 날에 아래 p 태그 출력
         return <p 
           style={{
             fontSize: 8, 
@@ -74,18 +87,24 @@ const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/
     }
   };
 
+  // 월별 지출 데이터
   const getMonthData = (value) => {
-    if (value.month() === 7) {
-      return 1394;
+    for (let i = 0; i <monthlySpending.length; i++) {
+      // monthlySpending 데이터 해당 월에 지출액 출력
+      if (monthlySpending[i]._id === value.format("YYYY-MM")) {
+        return formatPrice(monthlySpending[i].totalAmount)
+      }
     }
   };
   
+  // 월별 지출 조회 API (antd)
   const monthCellRender = (value) => {
+    // 해당 월 totalamount
     const num = getMonthData(value);
     return num ? (
       <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
+        <section>지출액</section>
+        <span style={{color: '#fc037b'}}>₩ {num}</span>
       </div>
     ) : null;
   };
@@ -95,7 +114,7 @@ const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('/
     <StyledCalender 
       cellRender={cellRender}
       onSelect={(date)=> { 
-        setSelectedDate(formatDate(date).split('/'))
+        setSelectedDate(formatDate(date).split('-'))
       }}
       />
   </Container>
@@ -106,16 +125,15 @@ export default TheCalendar;
 
 const Container = styled.div`
   background-color: aqua;
-  width: 430px;
-  height: 932px;
+  width: 744px;
+  height: 1133px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
 `
 const StyledCalender = styled(Calendar)`
-  width: 420px;
-  height: 40%;
+  width: 704px;
   font-size: 12px;
 
   .ant-picker-calendar-header {
@@ -125,8 +143,8 @@ const StyledCalender = styled(Calendar)`
   }
 
   .ant-picker-cell-inner.ant-picker-calendar-date{
-    height: 50px;
-    margin: 0 5px;
+    // height: 50px;
+    // margin: 0 5px;
     padding: 0;
   }
   .ant-picker-calendar-date-value {
@@ -134,12 +152,13 @@ const StyledCalender = styled(Calendar)`
     height: 10px;
   }
   .ant-picker-calendar-date-content {
-    height: 50px;
+    height: 100%;
     display: flex;
     justify-content: center;
-
+    align-items: center;
   }
   .events {
+    height: 100%;
     margin: 0;
     padding: 0;
        
@@ -158,7 +177,7 @@ const StyledCalender = styled(Calendar)`
   }
 
   .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
-    border-color: #35495e;
+    // border-color: #35495e;
   }
 
 `
