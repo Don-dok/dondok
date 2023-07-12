@@ -28,8 +28,8 @@ const lookupByDate = async (period) => {
 }
 
 // 소비 기록 달력 호출 
-const getSpendingCalendar = async (year, month, userId) => {
-    const res = await axios.get(`${BASE_URL}/calendar?year=${year}&month=${month}&userId=${userId}`);
+const getSpendingCalendar = async (year, month) => {
+    const res = await axios.get(`${BASE_URL}/calendar?year=${year}&month=${month}&userId=Team2`);
     if (res.status === 200) {
       console.log('소비 기록 달력 data', res.data);
       return res.data

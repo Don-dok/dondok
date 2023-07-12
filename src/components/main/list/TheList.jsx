@@ -7,6 +7,8 @@ import styled from 'styled-components'
 const TheList = () => {
   const [options, setOptions] = useState(['Daily', 'Weekly', 'Monthly']);
   const [selectedDate, setSelectedDate] = useState('daily');
+  // const [dateData, setDateData] = useState([])
+  const [isDaily, setIsDaily] = useState(true);
   const [daily, setDaily] = useState([]);
   const [weekly, setWeekly] = useState([]);
   const [monthly, setMonthly] = useState([]);
@@ -15,35 +17,27 @@ const TheList = () => {
     getSelectedDate();
   },[selectedDate])
 
+  // selectedDate에 따라 데이터 호출
   const getSelectedDate = () => {
-    lookupByDate(selectedDate).then(data => {
-      if (selectedDate === 'daily') {
-        setDaily(data);
-        console.log('Selected daily', data);
-      } else if (selectedDate === 'weekly') {
-        setWeekly(data);
-        console.log('Selected weekly', data);
-      } else {
-        setMonthly(data);
-        console.log('Selected monthly', data);
-      }
-    }).catch(error => console.log('선택 날짜 실패', error));
+    lookupByDate('daily').then(data => setDaily(data));
+    lookupByDate('weekly').then(data => setWeekly(data));
+    lookupByDate('monthly').then(data => setMonthly(data));
   };
 
+// selectedDate에 따라 props 변경되는 컴포넌트
   const TheDetails = () => {
     if (selectedDate === 'daily') {
-      return <Details dateData={daily}/>
+      return <Details dateData={daily} details={daily} isDaily={isDaily}/>
     } else if (selectedDate === 'weekly') {
-      return <Details dateData={weekly}/>
+      return <Details dateData={weekly} details={daily}/>
     } else {
-      return <Details dateData={monthly}/>
+      return <Details dateData={monthly} details={weekly}/>
     }
   }
   return (
     <Container>
     <Space direction="vertical">
       <Segmented 
-      de
         options={options} 
         onChange={(value)=> setSelectedDate(value.toLowerCase())}
         />

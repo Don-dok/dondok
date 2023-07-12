@@ -19,7 +19,7 @@ const [monthlySpending, setMonthlySpending] = useState()
   // 소비 달력 조회 API 호출
   const getSpending = async() => {
     try {
-      const res = await getSpendingCalendar(selectedDate[0], selectedDate[1], 'Team2');
+      const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSpending(res);
       console.log('소비달력핸들러',res);
     } catch (error) {
@@ -103,7 +103,7 @@ const [monthlySpending, setMonthlySpending] = useState()
     return num ? (
       <div className="notes-month">
         <section>지출액</section>
-        <span style={{color: '#fc037b'}}>₩ {num}</span>
+        <span style={{color: '#eb2f96'}}>₩ {num}</span>
       </div>
     ) : null;
   };

@@ -2,7 +2,9 @@ import React from 'react'
 
 const User = () => {
   return (
-    <div>User</div>
+    <div>
+      <div>User</div>
+    </div>
   )
 }
 
