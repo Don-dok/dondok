@@ -1,8 +1,9 @@
 import React from 'react';
+import ChartWrrper from './components/stastics/ChartWrapper';
 function App() {
   return (
     <div className="App">
-      <h2>hello2</h2>
+      <ChartWrrper />
     </div>
   );
 }
