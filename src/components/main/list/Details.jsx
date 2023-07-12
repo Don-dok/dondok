@@ -26,6 +26,8 @@ const Details = ({dateData, details, isDaily}) => {
       console.log('리스트 상세정보 실패', error);
     }
   }
+
+  // 리스트 상세 내역에 출력할 일별 지출 내역
   const getListData = () => {
     let spendingList = [];
     // spending 객체 for in 반복문으로 각 key: value 접근
@@ -34,12 +36,13 @@ const Details = ({dateData, details, isDaily}) => {
         const date = formatDate(spendingData[key][0].date)
         // 일 지출 합계
         const sum = spendingData[key].reduce((acc, cur)=> acc += cur.amount,0)
-        // spendingList 배열에 객체 데이터 {2023/7/10, 2860106} 넣기
+        // spendingList 배열에 객체 데이터 {2023/7/10, 2860106, data: Array} 넣기
         spendingList.push({date, sum, data: spendingData[key]})
     }
     return spendingList;
   };
 
+// item 속성 - daily일 때
 const dailyItems = () => {
 const data = getListData();
 console.log(data);
@@ -66,6 +69,8 @@ return data.sort((a,b)=> new Date(b.date) - new Date(a.date)).map((value, i)=> {
 }})
 
 }
+
+// item 속성 - daily 제외
   // eslint-disable-next-line react/prop-types
   const items = dateData.sort((a,b)=> new Date(b._id) - new Date(a._id)).map((value, i)=> {
     return {
