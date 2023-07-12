@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar } from 'antd'
 import styled from 'styled-components'
-import { lookupByDate, getSpendingCalendar } from '../../api/requests';
-import { formatPrice, formatDate } from '../../utils/format';
-
+import { lookupByDate, getSpendingCalendar } from '../../../api/requests';
+import { formatPrice, formatDate } from '../../../utils/format';
 
 
 
 const TheCalendar = () => {
-  // getSpendingCalendar API 응답 데이터
+// getSpendingCalendar API 응답 데이터
 const [spending, setSpending] = useState({});
 // getSpendingCalendar API에 필요한 인수 - 기본값: 오늘 날짜 [2023, 7, 11]
 const [selectedDate, setSelectedDate] = useState(formatDate(new Date()).split('-').map(Number));
@@ -110,30 +109,25 @@ const [monthlySpending, setMonthlySpending] = useState()
   };
 
   return (
-  <Container>
-    <StyledCalender 
+
+ <StyledCalender 
       cellRender={cellRender}
       onSelect={(date)=> { 
         setSelectedDate(formatDate(date).split('-'))
       }}
+
       />
-  </Container>
+
+
+
   )
 };
 
 export default TheCalendar;
 
-const Container = styled.div`
-  background-color: aqua;
-  width: 744px;
-  height: 1133px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-`
 const StyledCalender = styled(Calendar)`
-  width: 704px;
+  width: 400px;
   font-size: 12px;
 
   .ant-picker-calendar-header {
