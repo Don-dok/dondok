@@ -128,7 +128,6 @@ export default function TotalAmountChart() {
       console.log(error);
     }
   };
-
   // 이벤트 핸들러
   const handleChangeYear = (e) => {
     setYear(parseInt(e.target.value));
@@ -180,13 +179,16 @@ export default function TotalAmountChart() {
       ) : (
         <div>지출 내역이 없습니다.</div>
       )}
-
-      {data && (
-        <div>
-          <Line data={data} options={lineOptions_amount} />
-          <hr />
-          <Pie data={data} options={pieOptions_amount} />
-        </div>
+      {totalAmount ? (
+        data && (
+          <div>
+            <Line data={data} options={lineOptions_amount} />
+            <hr />
+            <Pie data={data} options={pieOptions_amount} />
+          </div>
+        )
+      ) : (
+        <h2>내역없음</h2>
       )}
     </div>
   );
