@@ -18,7 +18,7 @@ import {
   Filler,
   ArcElement,
 } from 'chart.js';
-// 차트에서 사용할 기능 등록
+
 ChartJS.register(
   BarElement,
   CategoryScale,
@@ -41,16 +41,6 @@ export default function TotalCategoryChart() {
   const [data, setData] = useState(null);
   const [totalAmount, setTotalAmount] = useState(0); // totalAmount 상태 추가
 
-  // 랜덤 컬러
-  const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -61,7 +51,6 @@ export default function TotalCategoryChart() {
 
       // 응답 데이터의 배열을 순회하며 카테고리와 금액 정보 추출
       const categoryAmounts = {}; // 카테고리별 금액 합계를 저장할 객체
-      const colors = [];
 
       Object.values(responseData).forEach((items) => {
         items.forEach((item) => {
@@ -72,7 +61,6 @@ export default function TotalCategoryChart() {
           } else {
             // 해당 카테고리의 금액이 없으면 새로 추가
             categoryAmounts[category] = amount;
-            colors.push(getRandomColor()); // 랜덤 색상 추가
           }
         });
       });
@@ -85,18 +73,20 @@ export default function TotalCategoryChart() {
             fill: true,
             label: '지출 금액(₩)',
             data: Object.values(categoryAmounts), // 카테고리별 금액 합계 사용
-            backgroundColor: colors,
-            // "rgba(242,80,34, .3)", // 빨
-            // "rgba(127,186,0, .3)", // 초
-            // "rgba(0,164,239, .3)", // 파
-            // "rgba(255,185,0, .3)", // 노
-            // "rgba(115,115,115, .3)", // 흑
-            borderColor: colors,
-            // "rgba(242,80,34, .8)", // 빨
-            // "rgba(127,186,0, .8)", // 초
-            // "rgba(0,164,239, .8)", // 파
-            // "rgba(255,185,0, .8)", // 노
-            // "rgba(115,115,115, .8)", // 흑
+            backgroundColor: [
+              'rgba(242,80,34, .3)', // 빨
+              'rgba(127,186,0, .3)', // 초
+              'rgba(0,164,239, .3)', // 파
+              'rgba(255,185,0, .3)', // 노
+              'rgba(115,115,115, .3)', // 흑
+            ],
+            borderColor: [
+              'rgba(242,80,34, .8)', // 빨
+              'rgba(127,186,0, .8)', // 초
+              'rgba(0,164,239, .8)', // 파
+              'rgba(255,185,0, .8)', // 노
+              'rgba(115,115,115, .8)', // 흑
+            ],
             borderWidth: 3,
           },
         ],
@@ -113,7 +103,7 @@ export default function TotalCategoryChart() {
     }
   };
 
-  // 이벤트 핸들러
+  //  핸들러
   const handleChangeYear = (e) => {
     setYear(parseInt(e.target.value));
   };
@@ -124,16 +114,17 @@ export default function TotalCategoryChart() {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div>
       <span>
-        <label htmlFor="year">Year: </label>
+        <label htmlFor="year"> </label>
         <select id="year" value={year} onChange={handleChangeYear}>
-          <option value={currentYear - 2}>{currentYear - 2}</option>
-          <option value={currentYear - 1}>{currentYear - 1}</option>
-          <option value={currentYear}>{currentYear}</option>
-          <option value={currentYear + 1}>{currentYear + 1}</option>
-          <option value={currentYear + 2}>{currentYear + 2}</option>
+          <option value={currentYear - 2}>{currentYear - 2}년</option>
+          <option value={currentYear - 1}>{currentYear - 1}년</option>
+          <option value={currentYear}>{currentYear}년</option>
+          <option value={currentYear + 1}>{currentYear + 1}년</option>
+          <option value={currentYear + 2}>{currentYear + 2}년</option>
         </select>
       </span>
       <span
@@ -141,7 +132,7 @@ export default function TotalCategoryChart() {
           marginLeft: '5px',
         }}
       >
-        <label htmlFor="month">Month: </label>
+        <label htmlFor="month"> </label>
         <select id="month" value={month} onChange={handleChangeMonth}>
           <option value={1}>1월</option>
           <option value={2}>2월</option>
@@ -156,10 +147,10 @@ export default function TotalCategoryChart() {
           <option value={11}>11월</option>
           <option value={12}>12월</option>
         </select>
-        <button onClick={fetchData}>Fetch Data</button>
+        <button onClick={fetchData}>검색</button>
       </span>
       {totalAmount ? (
-        <div>Total Amount: {totalAmount}원</div>
+        <div>총 지출 금액: {totalAmount}원</div>
       ) : (
         <div>지출 내역이 없습니다.</div>
       )}
@@ -167,6 +158,7 @@ export default function TotalCategoryChart() {
       {data && (
         <div>
           <Bar data={data} options={barOptions_category} />
+          <hr />
           <Pie data={data} options={pieOptions_category} />
         </div>
       )}

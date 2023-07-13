@@ -124,13 +124,6 @@ export default function TotalAmountChart() {
         .map((item) => Object.values(item).reduce((acc, curr) => acc + curr, 0))
         .reduce((acc, curr) => acc + curr, 0);
       setTotalAmount(total);
-
-      console.log(categoryAmounts);
-      console.log(
-        Object.values(categoryAmounts)
-          .map((i) => i)
-          .map((j) => Object.values(j)),
-      );
     } catch (error) {
       console.log(error);
     }
@@ -151,13 +144,13 @@ export default function TotalAmountChart() {
   return (
     <div>
       <span>
-        <label htmlFor="year">Year: </label>
+        <label htmlFor="year"></label>
         <select id="year" value={year} onChange={handleChangeYear}>
-          <option value={currentYear - 2}>{currentYear - 2}</option>
-          <option value={currentYear - 1}>{currentYear - 1}</option>
-          <option value={currentYear}>{currentYear}</option>
-          <option value={currentYear + 1}>{currentYear + 1}</option>
-          <option value={currentYear + 2}>{currentYear + 2}</option>
+          <option value={currentYear - 2}>{currentYear - 2}년</option>
+          <option value={currentYear - 1}>{currentYear - 1}년</option>
+          <option value={currentYear}>{currentYear}년</option>
+          <option value={currentYear + 1}>{currentYear + 1}년</option>
+          <option value={currentYear + 2}>{currentYear + 2}년</option>
         </select>
       </span>
       <span
@@ -165,7 +158,7 @@ export default function TotalAmountChart() {
           marginLeft: '5px',
         }}
       >
-        <label htmlFor="month">Month: </label>
+        <label htmlFor="month"></label>
         <select id="month" value={month} onChange={handleChangeMonth}>
           <option value={1}>1월</option>
           <option value={2}>2월</option>
@@ -180,10 +173,10 @@ export default function TotalAmountChart() {
           <option value={11}>11월</option>
           <option value={12}>12월</option>
         </select>
-        <button onClick={fetchData}>Fetch Data</button>
+        <button onClick={fetchData}>검색</button>
       </span>
       {totalAmount ? (
-        <div>Total Amount: {totalAmount}원</div>
+        <div>총 지출 금액: {totalAmount}원</div>
       ) : (
         <div>지출 내역이 없습니다.</div>
       )}
@@ -191,6 +184,7 @@ export default function TotalAmountChart() {
       {data && (
         <div>
           <Line data={data} options={lineOptions_amount} />
+          <hr />
           <Pie data={data} options={pieOptions_amount} />
         </div>
       )}

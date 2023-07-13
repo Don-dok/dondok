@@ -4,11 +4,11 @@ export const barOptions_category = {
   plugins: {
     legend: {
       display: true,
-      position: "left",
+      position: 'left',
     },
     title: {
       display: true,
-      text: "카테고리별 지출 내역 조회",
+      text: '카테고리별 지출 내역 조회',
       font: {
         size: 20,
       },
@@ -19,7 +19,7 @@ export const barOptions_category = {
       },
     },
     tooltip: {
-      mode: "index", // 상세 정보를 표시할 때 인덱스 모드로 설정
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
       intersect: false, // 충돌하지 않도록 설정
     },
   },
@@ -29,7 +29,7 @@ export const pieOptions_category = {
   responsive: true,
   plugins: {
     legend: {
-      position: "right",
+      position: 'right',
       display: true,
     },
     scales: {
@@ -38,7 +38,7 @@ export const pieOptions_category = {
       },
     },
     tooltip: {
-      mode: "index", // 상세 정보를 표시할 때 인덱스 모드로 설정
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
       intersect: false, // 충돌하지 않도록 설정
     },
   },
@@ -52,13 +52,13 @@ export const lineOptions_amount = {
   radius: 10, // point 크기
   plugins: {
     legend: {
-      position: "left",
+      position: 'left',
       display: true,
     },
 
     title: {
       display: true,
-      text: "일별 지출 내역 조회",
+      text: '일별 지출 내역 조회',
       font: {
         size: 20,
       },
@@ -69,7 +69,7 @@ export const lineOptions_amount = {
       },
     },
     tooltip: {
-      mode: "index", // 상세 정보를 표시할 때 인덱스 모드로 설정
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
       intersect: false, // 충돌하지 않도록 설정
     },
   },
@@ -79,7 +79,7 @@ export const pieOptions_amount = {
   responsive: true,
   plugins: {
     legend: {
-      position: "right",
+      position: 'right',
       // display: false,
     },
     scales: {
@@ -88,7 +88,52 @@ export const pieOptions_amount = {
       },
     },
     tooltip: {
-      mode: "index", // 상세 정보를 표시할 때 인덱스 모드로 설정
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
+      intersect: false, // 충돌하지 않도록 설정
+    },
+  },
+};
+
+export const barOptions_period = {
+  borderWidh: 10,
+  plugins: {
+    legend: {
+      display: true,
+      position: 'left',
+    },
+    title: {
+      display: true,
+      text: '전체 달 지출 내역',
+      font: {
+        size: 20,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // y 축 최소값을 0으로 설정
+      },
+    },
+    tooltip: {
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
+      intersect: false, // 충돌하지 않도록 설정
+    },
+  },
+};
+
+export const pieOptions_period = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'right',
+      // display: false,
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // y 축 최소값을 0으로 설정
+      },
+    },
+    tooltip: {
+      mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
       intersect: false, // 충돌하지 않도록 설정
     },
   },
