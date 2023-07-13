@@ -1,61 +1,64 @@
-import React from 'react'
+import React from 'react';
 import { Tabs } from 'antd';
 import SubTabs from '../main/SubTabs';
-import { DollarOutlined, BarChartOutlined, SearchOutlined, SmileOutlined } from '@ant-design/icons';
-import Circle from '../stastics/Circle';
+import {
+  DollarOutlined,
+  BarChartOutlined,
+  SearchOutlined,
+  SmileOutlined,
+} from '@ant-design/icons';
+import Circle from '../stastics/ChartWrapper';
 import User from '../user/User';
 import Search from '../search/Search';
 import { styled } from 'styled-components';
 const TheTabs = () => {
   return (
-    <> 
-      <StyledTabs
-    tabPosition='bottom'
-    size='large'
-    items={[
-      {
-        label: (
-          <span>
-            <DollarOutlined />
-          </span>
-        ),
-        key: '1',
-        children: (<SubTabs/>),
-    },
-    {
-      label: (
-        <span>
-          <SearchOutlined />
-        </span>
-      ),
-      key: '2',
-      children: (<Search />),
-  },
-    {
-      label: (
-        <span>
-          <BarChartOutlined />
-        </span>
-      ),
-      key: '3',
-      children: (<Circle/>),
-  },
-    {
-      label: (
-        <span>
-          <SmileOutlined />
-        </span>
-      ),
-      key: '4',
-      children: (<User />),
-  },
-    ]}
-  />
-  </>
-  )
-}
+    <StyledTabs
+      tabPosition="bottom"
+      size="large"
+      items={[
+        {
+          label: (
+            <span>
+              <DollarOutlined />
+            </span>
+          ),
+          key: '1',
+          children: <SubTabs />,
+        },
+        {
+          label: (
+            <span>
+              <SearchOutlined />
+            </span>
+          ),
+          key: '2',
+          children: <Search />,
+        },
+        {
+          label: (
+            <span>
+              <BarChartOutlined />
+            </span>
+          ),
+          key: '3',
+          children: <Circle />,
+        },
+        {
+          label: (
+            <span>
+              <SmileOutlined />
+            </span>
+          ),
+          key: '4',
+          children: <User />,
+        },
+      ]}
+    />
+  );
+};
 
-export default TheTabs
+export default TheTabs;
 
 const StyledTabs = styled(Tabs)`
   position: absolute;
@@ -75,5 +78,4 @@ const StyledTabs = styled(Tabs)`
     justify-content: center;
     margin: 0 0 0 10px;
   }
-
-`
+`;

@@ -1,26 +1,35 @@
-import React from 'react'
-import styled from 'styled-components'
-import {DollarTwoTone} from '@ant-design/icons'
+import React from 'react';
+import styled from 'styled-components';
+import { DollarTwoTone } from '@ant-design/icons';
 
 const TheHeader = () => {
   return (
     <Header>
-      <DollarTwoTone twoToneColor='#e57e25'/>
-      <div style={{
-        fontWeight: 700, 
-        fontFamily: 'Pretendard-Regular',
-        marginBottom: -3
-        }}>DonDok</div>
+      <DollarTwoTone twoToneColor="#e57e25" />
+      <div
+        style={{
+          fontWeight: 700,
+          fontFamily: 'Pretendard-Regular',
+          marginBottom: -3,
+        }}
+      >
+        DonDok
+      </div>
     </Header>
-  )
-}
+  );
+};
 
-export default TheHeader
+export default TheHeader;
 
 const Header = styled.section`
+  position: fixed;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: cente;
   height: 40px;
+  top: 0;
   gap: 5px;
-`
+  z-index: 1000;
+  width: 100%;
+  background-color: red;
+`;
