@@ -1,14 +1,17 @@
 import React from 'react';
 import TheTabs from './components/common/TheTabs';
 import TheHeader from './components/common/TheHeader';
+import ChartWrrper from './components/stastics/ChartWrapper';
 import { styled } from 'styled-components';
 function App() {
   return (
     <div className="App">
+      <ChartWrrper />
       <Container>
         <TheHeader/>
         <TheTabs />
       </Container>
+
     </div>
   );
 }
