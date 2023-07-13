@@ -1,5 +1,4 @@
 import React from 'react';
-import TheCalendar from './components/main/calendar/TheCalendar';
 import TheTabs from './components/common/TheTabs';
 import TheHeader from './components/common/TheHeader';
 import { styled } from 'styled-components';
