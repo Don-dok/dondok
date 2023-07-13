@@ -21,7 +21,6 @@ const [monthlySpending, setMonthlySpending] = useState()
     try {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSpending(res);
-      console.log('소비달력핸들러',res);
     } catch (error) {
       console.log('소비달력실패', error)
     }
@@ -32,7 +31,6 @@ const [monthlySpending, setMonthlySpending] = useState()
     try {
       const res = await lookupByDate('monthly');
       setMonthlySpending(res);
-      console.log('월별 조회 성공', res);
     } catch (error) {
       console.log('월별 조회 실패', error);
     }

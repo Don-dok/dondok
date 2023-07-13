@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Card, Avatar, Menu } from 'antd';
 import { GithubOutlined, RightOutlined } from '@ant-design/icons'
 import styled from 'styled-components'

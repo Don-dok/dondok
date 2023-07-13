@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { lookupByDate } from '../../../api/requests'
 import { Segmented, Space } from 'antd';
 import Details from './Details';
@@ -7,15 +7,17 @@ import styled from 'styled-components'
 const TheList = () => {
   const [options, setOptions] = useState(['Daily', 'Weekly', 'Monthly']);
   const [selectedDate, setSelectedDate] = useState('daily');
-  // const [dateData, setDateData] = useState([])
   const [isDaily, setIsDaily] = useState(true);
+  const [isWeekly, setIsWeekly] = useState(true);
   const [daily, setDaily] = useState([]);
   const [weekly, setWeekly] = useState([]);
   const [monthly, setMonthly] = useState([]);
 
+
   useEffect(()=>{
     getSelectedDate();
   },[selectedDate])
+
 
   // selectedDate에 따라 데이터 호출
   const getSelectedDate = () => {
@@ -29,7 +31,7 @@ const TheList = () => {
     if (selectedDate === 'daily') {
       return <Details dateData={daily} details={daily} isDaily={isDaily}/>
     } else if (selectedDate === 'weekly') {
-      return <Details dateData={weekly} details={daily}/>
+      return <Details dateData={weekly} details={daily} isWeekly={isWeekly}/>
     } else {
       return <Details dateData={monthly} details={weekly}/>
     }
