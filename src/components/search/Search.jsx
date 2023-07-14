@@ -20,7 +20,7 @@ const Search = () => {
       const categorySuggestions = Array.from(new Set(data.map((item) => item.category))); // 중복 제거
       setSuggestions(categorySuggestions);
     } catch (error) {
-      console.log('에러:', error);
+      alert('오류가 발생했습니다.', error)
     }
   };
 

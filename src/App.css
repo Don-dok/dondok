@@ -1,7 +1,6 @@
 .App {
   position: relative;
   margin: auto auto;
-  background-color: aqua;
   overflow-y: scroll;
   width: 430px;
   height: 932px;

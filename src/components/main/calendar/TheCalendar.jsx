@@ -21,7 +21,7 @@ const TheCalendar = () => {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSpending(res);
     } catch (error) {
-      console.log('소비달력실패', error);
+      alert('오류가 발생했습니다.', error)
     }
   };
 
@@ -31,7 +31,7 @@ const TheCalendar = () => {
       const res = await lookupByDate('monthly');
       setMonthlySpending(res);
     } catch (error) {
-      console.log('월별 조회 실패', error);
+      alert('오류가 발생했습니다.', error)
     }
   };
 
