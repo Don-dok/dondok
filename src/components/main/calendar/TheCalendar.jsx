@@ -76,7 +76,7 @@ const TheCalendar = () => {
             style={{
               fontSize: 8,
               marginTop: 16,
-              color: '#fc037b',
+              color: '#EB455F',
               wordBreak: 'break-all', // 너비보다 글자가 긴 경우, 줄바꿈
               lineHeight: 1,
             }}
@@ -104,8 +104,7 @@ const TheCalendar = () => {
     const num = getMonthData(value);
     return num ? (
       <div className="notes-month">
-        <section>지출액</section>
-        <span style={{ color: '#eb2f96' }}>₩ {num}</span>
+        <span style={{ color: '#EB455F' }}>₩ {num}</span>
       </div>
     ) : null;
   };
