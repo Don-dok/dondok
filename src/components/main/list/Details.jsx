@@ -8,15 +8,12 @@ import {
 import styled from 'styled-components';
 import { getSpendingCalendar } from '../../../api/requests';
 
-
-
 // eslint-disable-next-line react/prop-types
 const Details = ({ dateData, details, isDaily, isWeekly }) => {
   const [selectedDate, setSelectedDate] = useState(
     formatDate(new Date())?.split('-').map(Number),
   );
   const [spendingData, setSpendingData] = useState({});
-
 
   useEffect(() => {
     getSpendingData();
@@ -28,7 +25,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSpendingData(res);
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      alert('오류가 발생했습니다.', error);
     }
   };
 
@@ -64,7 +61,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
           label: (
             <Container>
               <p style={{ fontWeight: 700 }}>{value.date}</p>
-              <p style={{ color: '#eb2f96' }}>₩ {formatPrice(value.sum)}</p>
+              <p style={{ color: '#EF6262' }}>₩ {formatPrice(value.sum)}</p>
             </Container>
           ),
           // 상세 내역
@@ -73,7 +70,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
             .map((value, i) => (
               <Details_Box key={i}>
                 <li>
-                  <Tag color="magenta">{value.category}</Tag>
+                  <Tag color="#468B97">{value.category}</Tag>
                   <p>₩{formatPrice(value.amount)}</p>
                 </li>
               </Details_Box>
@@ -150,7 +147,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   //     };
   //   });
 
-
   // eslint-disable-next-line react/prop-types
   // const weeklyData = dateData.map(item => {
   //     if (item._id) {
@@ -160,47 +156,72 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   //       return item;
   //     }
   //      })
+  // const sortedData = [...dateData].sort((a,b)=> {
+  //   Number(b._id.replace(/-/,"")) - Number(a._id.replace(/-/,""))} )
+  //   console.log({sortedData})
+
+  const sortedData = [...dateData].sort((a, b) => {
+    console.log(a, b);
+    return true;
+  });
+  console.log(sortedData);
 
   const CardList = () => {
-    if (isWeekly) {
-    // eslint-disable-next-line react/prop-types
+    if (isWeekly && dateData.length) {
+      return dateData
+        .sort((a, b) => {
+          if (a._id && b._id) {
+            return (
+              Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''))
+            );
+          }
+          return true;
+        })
+        .map((value, i) => {
+          if (value._id) {
+            const date = value._id.split('-').map((item) => Number(item));
+            return (
+              <StyledCard
+                key={i}
+                style={{
+                  width: 250,
+                }}
+              >
+                <strong>{getStartDateAndEndDate(date[0], date[1] - 1)}</strong>
+                <div>
+                  <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
+                  <p style={{ color: '#468B97', fontSize: 12 }}>
+                    전주보다 많이 쓰셨어요!
+                  </p>
+                </div>
+              </StyledCard>
+            );
+          }
+        });
+    } else if (!isWeekly && !isDaily) {
+      // eslint-disable-next-line react/prop-types
       return dateData.map((value, i) => {
         if (value._id) {
-        const date = value._id.split('-').map((item) => Number(item));
-        return (
-          <Card
-            key={i}
-            style={{
-              width: 300,
-            }}
-          >
-            <p>{getStartDateAndEndDate(date[0], date[1] - 1)}</p>
-            <p>₩ {formatPrice(value.totalAmount)}</p>
-            <p>Card content</p>
-          </Card>
-        );
-        }
-        })
-    } else if (!isWeekly && !isDaily){
-    // eslint-disable-next-line react/prop-types
-      return dateData.map ((value, i)=> { 
-        if (value._id) {
           return (
-            <Card
+            <StyledCard
               key={i}
               style={{
                 width: 300,
               }}
             >
-              <p>{value._id}</p>
-              <p>₩ {formatPrice(value.totalAmount)}</p>
-              <p>Card content</p>
-            </Card>
+              <strong>{value._id}</strong>
+              <div>
+                <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
+                <p style={{ color: '#468B97', fontSize: 12 }}>
+                  전월보다 많이 쓰셨어요!
+                </p>
+              </div>
+            </StyledCard>
           );
         }
-      })
+      });
     }
-  }
+  };
 
   return isDaily ? (
     <Collapse
@@ -211,12 +232,15 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
         setSelectedDate(value[0]?.split('-').map((value) => Number(value)))
       }
     />
-  ) : <CardList/>
+  ) : (
+    <CardList />
+  );
 };
 
 export default Details;
 
 const Container = styled.div`
+  color: #202e3d;
   display: flex;
   gap: 70px;
   p {
@@ -234,5 +258,18 @@ const Details_Box = styled.ul`
       margin: 0;
       font-weight: 600;
     }
+  }
+`;
+
+const StyledCard = styled(Card)`
+  color: #202e3d;
+  margin-top: 20px;
+  .ant-card-body {
+    padding: 10px 20px;
+  }
+
+  .amount {
+    float: right;
+    color: #ef6262;
   }
 `;
