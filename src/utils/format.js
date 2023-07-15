@@ -27,7 +27,7 @@ const formatDate = (date) => {
     const lastWeekStart = startOfWeek + (7 * week) - 1;
     const lastWeekStartDate = new Date(year, 0, lastWeekStart);
   
-    return formatDate(firstWeekStartDate) + '~' + formatDate(lastWeekStartDate)
+    return formatDate(firstWeekStartDate) + ' ~ ' + formatDate(lastWeekStartDate)
   }
 
 export {formatPrice, formatDate, getStartDateAndEndDate}
