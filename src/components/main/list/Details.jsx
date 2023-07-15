@@ -8,7 +8,6 @@ import {
 import styled from 'styled-components';
 import { getSpendingCalendar } from '../../../api/requests';
 
-// eslint-disable-next-line react/prop-types
 const Details = ({ dateData, details, isDaily, isWeekly }) => {
   const [selectedDate, setSelectedDate] = useState(
     formatDate(new Date())?.split('-').map(Number),
@@ -79,7 +78,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
       });
   };
   // 컴포넌트의 item 속성에 들어갈 값 - weekly
-  // eslint-disable-next-line react/prop-types
+
   // const weeklyItems = dateData.sort((a,b)=> new Date(b._id) - new Date(a._id)).map((value, i)=> {
   //   if (value._id) {
   //     const date = value._id.split('-').map(item => Number(item))
@@ -115,7 +114,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
 
   // 컴포넌트의 item 속성에 들어갈 값 - monthly
   // const monthlyItems = dateData
-  //   // eslint-disable-next-line react/prop-types
   //   .sort((a, b) => new Date(b._id) - new Date(a._id))
   //   .map((value, i) => {
   //     return {
@@ -147,7 +145,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   //     };
   //   });
 
-  // eslint-disable-next-line react/prop-types
   // const weeklyData = dateData.map(item => {
   //     if (item._id) {
   //       const date = item._id.split('-').map(item => Number(item))
@@ -161,7 +158,9 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   //   console.log({sortedData})
 
   const sortedData = [...dateData].sort((a, b) => {
-    console.log(a, b);
+    if (a._id && b._id) {
+      return Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''));
+    }
     return true;
   });
   console.log(sortedData);
@@ -199,7 +198,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
           }
         });
     } else if (!isWeekly && !isDaily) {
-      // eslint-disable-next-line react/prop-types
       return dateData.map((value, i) => {
         if (value._id) {
           return (
