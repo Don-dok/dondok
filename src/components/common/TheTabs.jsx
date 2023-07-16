@@ -11,10 +11,15 @@ import Circle from '../stastics/ChartWrapper';
 import User from '../user/User';
 import Search from '../search/Search';
 import { styled } from 'styled-components';
-const TheTabs = () => {
+import TabPane from 'antd/es/tabs/TabPane';
+
+const TheTabs = ({ setActiveKey }) => {
   return (
     <StyledTabs
       tabPosition="bottom"
+      onChange={(activeKey) => {
+        setActiveKey(activeKey);
+      }}
       size="large"
       items={[
         {
@@ -24,7 +29,6 @@ const TheTabs = () => {
             </span>
           ),
           key: '1',
-          children: <SubTabs />,
         },
         {
           label: (
@@ -33,7 +37,6 @@ const TheTabs = () => {
             </span>
           ),
           key: '2',
-          children: <Search />,
         },
         {
           label: (
@@ -42,7 +45,6 @@ const TheTabs = () => {
             </span>
           ),
           key: '3',
-          children: <Circle />,
         },
         {
           label: (
@@ -51,7 +53,6 @@ const TheTabs = () => {
             </span>
           ),
           key: '4',
-          children: <User />,
         },
       ]}
     />
