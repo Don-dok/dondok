@@ -163,42 +163,33 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
     }
     return true;
   });
-  console.log(sortedData);
+  console.log('sort', sortedData);
 
   const CardList = () => {
     if (isWeekly && dateData.length) {
-      return dateData
-        .sort((a, b) => {
-          if (a._id && b._id) {
-            return (
-              Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''))
-            );
-          }
-          return true;
-        })
-        .map((value, i) => {
-          if (value._id) {
-            const date = value._id.split('-').map((item) => Number(item));
-            return (
-              <StyledCard
-                key={i}
-                style={{
-                  width: 250,
-                }}
-              >
-                <strong>{getStartDateAndEndDate(date[0], date[1] - 1)}</strong>
-                <div>
-                  <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
-                  <p style={{ color: '#468B97', fontSize: 12 }}>
-                    전주보다 많이 쓰셨어요!
-                  </p>
-                </div>
-              </StyledCard>
-            );
-          }
-        });
+      return sortedData.map((value, i) => {
+        if (value._id) {
+          const date = value._id.split('-').map((item) => Number(item));
+          return (
+            <StyledCard
+              key={i}
+              style={{
+                width: 250,
+              }}
+            >
+              <strong>{getStartDateAndEndDate(date[0], date[1] - 1)}</strong>
+              <div>
+                <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
+                <p style={{ color: '#468B97', fontSize: 12 }}>
+                  전주보다 많이 쓰셨어요!
+                </p>
+              </div>
+            </StyledCard>
+          );
+        }
+      });
     } else if (!isWeekly && !isDaily) {
-      return dateData.map((value, i) => {
+      return sortedData.map((value, i) => {
         if (value._id) {
           return (
             <StyledCard
