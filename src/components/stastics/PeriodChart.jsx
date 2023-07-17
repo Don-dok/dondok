@@ -88,7 +88,7 @@ export default function PeriodChart() {
       setData(chartData);
       setTotalAmount(totalAmountSum);
     } catch (error) {
-      console.log(error);
+      alert('오류가 발생했습니다.', error)
     }
   };
 

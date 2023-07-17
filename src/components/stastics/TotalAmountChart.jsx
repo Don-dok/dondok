@@ -125,7 +125,7 @@ export default function TotalAmountChart() {
         .reduce((acc, curr) => acc + curr, 0);
       setTotalAmount(total);
     } catch (error) {
-      console.log(error);
+      alert('오류가 발생했습니다.', error)
     }
   };
   // 이벤트 핸들러

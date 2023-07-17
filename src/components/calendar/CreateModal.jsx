@@ -43,7 +43,7 @@ const CreateModal = ({ getList }) => {
         alert('등록실패');
       }
     } catch (e) {
-      console.log(e);
+      alert('오류가 발생했습니다.', e)
     }
   };
   const handleCancel = () => {
