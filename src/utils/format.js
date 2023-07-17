@@ -30,6 +30,7 @@ function getStartDateAndEndDate(year, week) {
   const lastWeekStart = startOfWeek + 7 * week - 1;
   const lastWeekStartDate = new Date(year, 0, lastWeekStart);
 
-  return formatDate(firstWeekStartDate) + ' ~ ';
+  return formatDate(firstWeekStartDate) + ' ~ ' + formatDate(lastWeekStartDate);
 }
+
 export { formatPrice, formatDate, getStartDateAndEndDate };
