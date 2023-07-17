@@ -31,12 +31,22 @@ const items = [
   getItem('계정설정', 'sub5',<RightOutlined />),
 ];
 
+
+const StyledMenu = styled(Menu)`
+  width: 400px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+`;
+
+
 const User = () => {
   return (
     <Container>
             <Card
         hoverable
-        style={{ width: 350 }}
+        style={{ width: 400 }}
         onClick={()=> window.open("https://github.com/Don-dok/dondok")}
         cover={
           <img
@@ -54,7 +64,7 @@ const User = () => {
             <p>https://github.com/Don-dok/dondok</p>
           </TextBox>
       </Card>
-      <Menu style={{ width: 350, marginTop: 10 }} mode="vertical" items={items}/>
+      <StyledMenu mode="vertical" items={items} />
     </Container>
 
   );
@@ -66,6 +76,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 100px;
+
+
 
 `
 const StyledMeta = styled(Meta)`
@@ -81,4 +94,7 @@ const TextBox = styled.div`
     color: #868e96;
     margin: 0;
   }
+
+
+
 `

@@ -3,10 +3,9 @@ import TheTabs from './components/common/TheTabs';
 import TheHeader from './components/common/TheHeader';
 import './App.css';
 import { styled } from 'styled-components';
-import SubTabs from './components/main/SubTabs';
-import Search from 'antd/es/transfer/search';
-import ChartWrpper from './components/stastics/ChartWrapper';
-import User from '../src/components/user/User';
+
+import 'reset-css';
+
 
 function App() {
   const [activeKey, setActiveKey] = useState('');
@@ -27,7 +26,11 @@ function App() {
     <div className="App">
       <TheHeader />
       <Container>
-        <Components />
+        <HeaderWrap>
+          <TheHeader />
+        </HeaderWrap>
+        <TheTabs />
+
       </Container>
       <TheTabs activeKey={activeKey} setActiveKey={setActiveKey} />
     </div>
@@ -37,12 +40,20 @@ function App() {
 export default App;
 
 const Container = styled.section`
-  box-sizing: border-box;
-  margin: 50px 0;
-  width: 430px;
-  height: 88%;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
+
+  margin-top: 50px;
+`;
+
+const HeaderWrap = styled.div `
+  position: relative;
+  width:100%;
+
 `;
