@@ -157,13 +157,26 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   //   Number(b._id.replace(/-/,"")) - Number(a._id.replace(/-/,""))} )
   //   console.log({sortedData})
 
-  const sortedData = [...dateData].sort((a, b) => {
-    if (a._id && b._id) {
-      return Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''));
-    }
-    return true;
-  });
+  const sortedData = [...dateData]
+    .sort((a, b) => {
+      if (a._id && b._id) {
+        return Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''));
+      }
+    })
+    .map((item) => {
+      if (item._id) {
+        item['num'] = Number(item._id.replace(/-/, ''));
+        return item;
+      }
+      return true;
+    });
+
   console.log('sort', sortedData);
+
+  // const diffData = sortedData.reduce((prev, cur) =>
+  //   cur.num - prev.num === -1 ? prev.totalAmount - cur.totalAmount : null,
+  // );
+  // console.log('diff', diffData);
 
   const CardList = () => {
     if (isWeekly && dateData.length) {
@@ -213,7 +226,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
   };
 
   return isDaily ? (
-    <Collapse
+    <StyledCollapse
       accordion
       // daily 일때 사용하는 API가 다르기 때문에 구분
       items={dailyItems()}
@@ -249,10 +262,13 @@ const Details_Box = styled.ul`
     }
   }
 `;
+const StyledCollapse = styled(Collapse)`
+  margin: 10px;
+`;
 
 const StyledCard = styled(Card)`
   color: #202e3d;
-  margin-top: 20px;
+  margin-top: 10px;
   .ant-card-body {
     padding: 10px 20px;
   }

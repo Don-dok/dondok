@@ -22,14 +22,14 @@ const TheHeader = () => {
 export default TheHeader;
 
 const Header = styled.section`
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
-  align-items: cente;
+  align-items: center;
   height: 40px;
   top: 0;
   gap: 5px;
   z-index: 1000;
   width: 100%;
-  background-color: red;
+  background-color: #fff;
 `;

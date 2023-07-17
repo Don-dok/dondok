@@ -64,10 +64,10 @@ export default TheTabs;
 const StyledTabs = styled(Tabs)`
   position: absolute;
   bottom: 0;
-  width: 430px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-
+  background-color: #fff;
   .ant-tabs-nav-list {
     display: flex;
     align-items: center;

@@ -20,7 +20,7 @@ const TheList = () => {
   // selectedDate에 따라 데이터 호출
   const getSelectedDate = () => {
     lookupByDate('daily').then((data) => setDaily(data));
-    lookupByDate('weekly').then((data) => setWeekly(data))
+    lookupByDate('weekly').then((data) => setWeekly(data));
     lookupByDate('monthly').then((data) => setMonthly(data));
   };
 
@@ -37,7 +37,7 @@ const TheList = () => {
   return (
     <Container>
       <Space direction="vertical">
-        <Segmented
+        <StyledSegmented
           options={options}
           onChange={(value) => setSelectedDate(value.toLowerCase())}
         />
@@ -53,4 +53,8 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const StyledSegmented = styled(Segmented)`
+  margin-bottom: 20px;
 `;

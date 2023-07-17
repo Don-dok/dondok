@@ -21,7 +21,7 @@ const TheCalendar = () => {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSpending(res);
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      alert('오류가 발생했습니다.', error);
     }
   };
 
@@ -31,7 +31,7 @@ const TheCalendar = () => {
       const res = await lookupByDate('monthly');
       setMonthlySpending(res);
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      alert('오류가 발생했습니다.', error);
     }
   };
 
@@ -135,8 +135,6 @@ const StyledCalender = styled(Calendar)`
   }
 
   .ant-picker-cell-inner.ant-picker-calendar-date {
-    // height: 50px;
-    // margin: 0 5px;
     padding: 0;
   }
   .ant-picker-calendar-date-value {
@@ -155,7 +153,6 @@ const StyledCalender = styled(Calendar)`
     padding: 0;
   }
   .ant-picker-cell {
-    overflow: hidden;
   }
   .ant-badge.ant-badge-status {
   }
@@ -172,5 +169,46 @@ const StyledCalender = styled(Calendar)`
 
   .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
     // border-color: #35495e;
+  }
+
+  @media screen and (max-height: 800px) {
+    .ant-picker-cell-inner.ant-picker-calendar-date {
+      height: 70px;
+      margin: 0 5px;
+      padding: 0;
+    }
+    .ant-picker-calendar-date-value {
+      font-size: 12px;
+      height: 10px;
+    }
+    .ant-picker-calendar-date-content {
+      position: relative;
+      height: 30px;
+      p {
+        position: absolute;
+        top: 10px;
+        margin: 0 0 0;
+      }
+    }
+    .events {
+      height: 50px;
+      margin: 0;
+      padding: 0;
+    }
+    .ant-picker-cell {
+      overflow: hidden;
+    }
+    .ant-badge.ant-badge-status {
+    }
+
+    .ant-badge-status-text {
+      display: inline-block;
+      font-family:
+        Times,
+        Times New Roman,
+        Georgia,
+        serif;
+      margin-top: 5px;
+    }
   }
 `;

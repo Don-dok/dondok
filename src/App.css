@@ -1,7 +1,8 @@
 .App {
   position: relative;
   margin: auto auto;
-  overflow-y: scroll;
+
+  border: 1px solid #191919;
   width: 430px;
-  height: 932px;
+  height: 100vh;
 }

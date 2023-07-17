@@ -25,11 +25,11 @@ function App() {
 
   return (
     <div className="App">
+      <TheHeader />
       <Container>
-        <TheHeader />
         <Components />
-        <TheTabs activeKey={activeKey} setActiveKey={setActiveKey} />
       </Container>
+      <TheTabs activeKey={activeKey} setActiveKey={setActiveKey} />
     </div>
   );
 }
@@ -37,12 +37,12 @@ function App() {
 export default App;
 
 const Container = styled.section`
-  position: relative;
-  border: 1px solid #191919;
-  width: 100%;
-  height: 100%;
+  box-sizing: border-box;
+  margin: 50px 0;
+  width: 430px;
+  height: 88%;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   align-items: center;
-  margin-top: 400px;
 `;
