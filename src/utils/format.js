@@ -6,7 +6,6 @@ const formatPrice = (target) => {
 };
 
 const formatDate = (date) => {
-
   const dateTimeStamp = new Date(date);
   const nineHoursInMillis = 9 * 60 * 60 * 1000;
   const newTimeStamp = dateTimeStamp - nineHoursInMillis;
@@ -31,6 +30,6 @@ function getStartDateAndEndDate(year, week) {
   const lastWeekStart = startOfWeek + 7 * week - 1;
   const lastWeekStartDate = new Date(year, 0, lastWeekStart);
 
-  return formatDate(firstWeekStartDate) + ' ~ ' + formatDate(lastWeekStartDate);
-
+  return formatDate(firstWeekStartDate) + ' ~ ';
+}
 export { formatPrice, formatDate, getStartDateAndEndDate };
