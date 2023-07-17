@@ -33,7 +33,7 @@ const ItemList = () => {
       }
       setLoading(false);
     } catch (e) {
-      console.log(e);
+      alert('오류가 발생했습니다.', e)
     }
   };
 
@@ -60,7 +60,7 @@ const ItemList = () => {
           { headers: headers },
         );
       } catch (e) {
-        console.log(e);
+        alert('오류가 발생했습니다.', e)
       }
       setEditableIndex(null);
       getList();
@@ -86,7 +86,7 @@ const ItemList = () => {
       getList();
       message.success('삭제완료');
     } catch (e) {
-      console.log(e);
+      alert('오류가 발생했습니다.', e)
     }
   };
   const updateCategoryHandler = (e, index) => {

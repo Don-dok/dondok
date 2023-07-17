@@ -99,7 +99,7 @@ export default function TotalCategoryChart() {
       );
       setTotalAmount(total); // totalAmount 상태 업데이트
     } catch (error) {
-      console.log(error);
+      alert('오류가 발생했습니다.', error)
     }
   };
 
