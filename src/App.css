@@ -1,8 +1,48 @@
+:root {
+  --calendar-date-content-height: 58px;
+  
+}
+
+.ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+  height: var(--calendar-date-content-height);
+}
+
+.ant-card-bordered{
+  outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.ant-menu-inline > .ant-menu-item,
+.ant-menu-vertical > .ant-menu-item,
+.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+.ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title {
+  height: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 10px;
+  width: 395px;
+}
+
+
+.ant-menu-light.ant-menu-root.ant-menu-inline,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-inline,
+.ant-menu-light.ant-menu-root.ant-menu-vertical,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-vertical {
+  border: none;
+}
+
+
 .App {
   position: relative;
   margin: auto auto;
-  background-color: aqua;
-  overflow-y: scroll;
   width: 430px;
-  height: 932px;
+  max-height: 932px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: hidden; 
+  overflow-y: scroll;
+  margin-top: 40px;
+}
+
+
+.App::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
