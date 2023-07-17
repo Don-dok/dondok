@@ -5,41 +5,20 @@ import DateTimeDisplay from './DateTimeDisplay';
 import axios from 'axios';
 import moment from 'moment';
 
-const ItemList = () => {
-  const [loading, setLoading] = useState(false); // 추가로 3개씩 더 불러오기 누를때마다 loading
-  const [list, setList] = useState([]);
+const ItemList = (props) => {
+  const list = props.listDetail;
+  if (list.length > 1) {
+    list.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+  }
   const [edit, setEdit] = useState(false);
   const [editableIndex, setEditableIndex] = useState(null);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(0);
   const [dateTime, setDateTime] = useState('');
-  // 목록 불러오기
-  const getList = async () => {
-    if (loading) {
-      return;
-    }
-    setLoading(true);
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-    try {
-      const res = await axios.get(
-        `http://52.78.195.183:3003/api/expenses/search?q=&userId=Team2`,
-        {},
-        { headers },
-      );
-      if (res) {
-        setList(res.data);
-      }
-      setLoading(false);
-    } catch (e) {
-      alert('오류가 발생했습니다.', e)
-    }
-  };
-
-  useEffect(() => {
-    getList();
-  }, []);
 
   const editHandler = async (index, item) => {
     if (edit && index === editableIndex) {
@@ -59,11 +38,11 @@ const ItemList = () => {
           body,
           { headers: headers },
         );
+        props.itemChangedHandler();
       } catch (e) {
-        alert('오류가 발생했습니다.', e)
+        alert('오류가 발생했습니다.', e);
       }
       setEditableIndex(null);
-      getList();
     } else {
       setEditableIndex(index);
       setAmount(item.amount);
@@ -83,10 +62,10 @@ const ItemList = () => {
         {},
         { headers: headers },
       );
-      getList();
+      props.itemChangedHandler();
       message.success('삭제완료');
     } catch (e) {
-      alert('오류가 발생했습니다.', e)
+      alert('오류가 발생했습니다.', e);
     }
   };
   const updateCategoryHandler = (e, index) => {
@@ -191,7 +170,10 @@ const ItemList = () => {
           )}
         />
       </div>
-      <CreateModal getList={getList} />
+      <CreateModal
+        // getSpending={props.getSpending}
+        itemChangedHandler={props.itemChangedHandler}
+      />
     </>
   );
 };

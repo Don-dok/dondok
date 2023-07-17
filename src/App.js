@@ -6,7 +6,6 @@ import { styled } from 'styled-components';
 
 import 'reset-css';
 
-
 function App() {
   const [activeKey, setActiveKey] = useState('');
 
@@ -30,7 +29,6 @@ function App() {
           <TheHeader />
         </HeaderWrap>
         <TheTabs />
-
       </Container>
       <TheTabs activeKey={activeKey} setActiveKey={setActiveKey} />
     </div>
@@ -40,7 +38,6 @@ function App() {
 export default App;
 
 const Container = styled.section`
-
   position: relative;
   width: 100%;
   height: 100%;
@@ -52,8 +49,7 @@ const Container = styled.section`
   margin-top: 50px;
 `;
 
-const HeaderWrap = styled.div `
+const HeaderWrap = styled.div`
   position: relative;
-  width:100%;
-
+  width: 100%;
 `;
