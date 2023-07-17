@@ -142,13 +142,11 @@ const StyledCalender = styled(Calendar)`
     height: 10px;
   }
   .ant-picker-calendar-date-content {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .events {
-    height: 100%;
     margin: 0;
     padding: 0;
   }
@@ -181,6 +179,8 @@ const StyledCalender = styled(Calendar)`
       font-size: 12px;
       height: 10px;
     }
+
+    // 데이터 출력되는 태그
     .ant-picker-calendar-date-content {
       position: relative;
       height: 30px;
