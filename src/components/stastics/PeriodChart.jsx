@@ -31,8 +31,11 @@ ChartJS.register(
 );
 
 export default function PeriodChart() {
+  const [selectYear, setSelectYear] = useState(new Date().getFullYear());
   const [totalAmount, setTotalAmount] = useState(0);
-  const [data, setData] = useState(null); // 차트 상태
+  const [data, setData] = useState(null);
+
+  const currentYear = new Date().getFullYear();
 
   const fetchPeriodSummary = async () => {
     try {
@@ -41,7 +44,13 @@ export default function PeriodChart() {
       );
       const responseData = response.data;
 
-      const sortPeriodData = responseData.sort((a, b) => {
+      // filter() => true인 값만 반환하니까 조건 설정
+      const filterYear = responseData.filter((item) => {
+        const itemYear = new Date(item._id).getFullYear();
+        return itemYear === selectYear;
+      });
+
+      const sortPeriodData = filterYear.sort((a, b) => {
         let x = (a._id || '').toLowerCase(); // Check if a._id is null or undefined
         let y = (b._id || '').toLowerCase(); // Check if b._id is null or undefined
         if (x < y) {
@@ -52,9 +61,10 @@ export default function PeriodChart() {
         }
         return 0;
       });
+
+      // 차트 데이터
       const amount = sortPeriodData.map((item) => item.totalAmount);
       const date = sortPeriodData.map((item) => item._id);
-
       const chartData = {
         labels: date, // x축
         datasets: [
@@ -80,33 +90,44 @@ export default function PeriodChart() {
           },
         ],
       };
-
-      let totalAmountSum = 0; // 총합을 저장할 변수를 초기화합니다.
-      responseData.forEach((item) => {
-        totalAmountSum += item.totalAmount; // totalAmount를 더합니다.
-      });
+      // 총 amount 저장
+      let totalAmountSum = amount.reduce((acc, cur) => acc + cur, 0);
       setData(chartData);
       setTotalAmount(totalAmountSum);
+      console.log(amount);
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchPeriodSummary(); // 페이지 로드 시에 소비 요약 데이터 요청
-  }, []);
+  }, [totalAmount]);
+
+  const handleYearChange = (e) => {
+    setSelectYear(parseInt(e.target.value));
+  };
 
   return (
     <div>
-      {totalAmount ? (
-        <div>총 지출 금액: {totalAmount}원</div>
+      <label htmlFor="year">연도 선택</label>
+      <select id="year" value={selectYear} onChange={handleYearChange}>
+        <option value={currentYear - 2}>{currentYear - 2}</option>
+        <option value={currentYear - 1}>{currentYear - 1}</option>
+        <option value={currentYear}>{currentYear}</option>
+        <option value={currentYear + 1}>{currentYear + 1}</option>
+        <option value={currentYear + 2}>{currentYear + 2}</option>
+      </select>
+      <button onClick={fetchPeriodSummary}>검색</button>
+      {totalAmount && data ? (
+        <div>
+          <div>총 지출 금액: {totalAmount}원</div>
+          {data ? <Bar data={data} options={barOptions_period} /> : null}
+          {data ? <Pie data={data} options={pieOptions_period} /> : null}
+        </div>
       ) : (
-        <div>지출 내역이 없습니다.</div>
+        <h1>지출 내역이 없습니다.</h1>
       )}
-      <button onClick={fetchPeriodSummary}>새로고침</button>
-      {data ? <Bar data={data} options={barOptions_period} /> : null}
-      <hr />
-      {data ? <Pie data={data} options={pieOptions_period} /> : null}
     </div>
   );
 }
