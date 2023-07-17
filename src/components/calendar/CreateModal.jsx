@@ -4,7 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const CreateModal = ({ getList }) => {
+const CreateModal = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [category, setCategory] = useState('');
   const [amount, setAmount] = useState(0);
@@ -35,7 +35,7 @@ const CreateModal = ({ getList }) => {
       );
       if (res) {
         setIsModalOpen(false);
-        getList();
+        props.itemChangedHandler();
         setDateTime(moment().add(9, 'hours').toISOString());
         setCategory('');
         setAmount('');
@@ -97,10 +97,6 @@ const CreateModal = ({ getList }) => {
       </Modal>
     </>
   );
-};
-
-CreateModal.propTypes = {
-  getList: PropTypes.func.isRequired,
 };
 
 export default CreateModal;

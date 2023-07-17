@@ -18,8 +18,4 @@ function DateTimeDisplay({ dateTime }) {
   return <div>{formattedDateTime}</div>;
 }
 
-DateTimeDisplay.propTypes = {
-  dateTime: PropTypes.func.isRequired,
-};
-
 export default DateTimeDisplay;

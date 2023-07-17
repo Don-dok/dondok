@@ -6,10 +6,14 @@ const formatPrice = (target) => {
 };
 
 const formatDate = (date) => {
-  const year = new Date(date).getFullYear();
-  const month = new Date(date).getMonth() + 1;
-  const day = new Date(date).getDate() - 1;
 
+  const dateTimeStamp = new Date(date);
+  const nineHoursInMillis = 9 * 60 * 60 * 1000;
+  const newTimeStamp = dateTimeStamp - nineHoursInMillis;
+  const newDate = new Date(newTimeStamp);
+  const year = new Date(newDate).getFullYear();
+  const month = new Date(newDate).getMonth() + 1;
+  const day = new Date(newDate).getDate();
   return `${year}-${month}-${day}`;
 };
 
@@ -28,6 +32,5 @@ function getStartDateAndEndDate(year, week) {
   const lastWeekStartDate = new Date(year, 0, lastWeekStart);
 
   return formatDate(firstWeekStartDate) + ' ~ ' + formatDate(lastWeekStartDate);
-}
 
 export { formatPrice, formatDate, getStartDateAndEndDate };

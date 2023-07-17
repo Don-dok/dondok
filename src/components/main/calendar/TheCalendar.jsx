@@ -12,19 +12,24 @@ const TheCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(
     formatDate(new Date()).split('-').map(Number),
   );
+  const [selectedDateDetail, setSelectedDateDetail] = useState([]);
+  const [changed, setChanged] = useState(false);
   // 월별 조회 API 응답데이터
   const [monthlySpending, setMonthlySpending] = useState();
-
   // 소비 달력 조회 API 호출
   const getSpending = async () => {
     try {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
+      setSelectedDateDetail(res[new Date().getDate()]);
       setSpending(res);
     } catch (error) {
       alert('오류가 발생했습니다.', error);
     }
   };
-
+  // 소비항목 변경시 재렌더링을 위한 상태값변경함수
+  const itemChangedHandler = async () => {
+    setChanged(!changed);
+  };
   // 일별, 주별, 월별 조회
   const getMonthlyData = async () => {
     try {
@@ -39,7 +44,8 @@ const TheCalendar = () => {
   useEffect(() => {
     getSpending();
     getMonthlyData();
-  }, []);
+    cellRender;
+  }, [changed]);
 
   // Calendar 컴포넌트에 출력될 데이터 API (antd)
   const cellRender = (value, info) => {
@@ -48,6 +54,15 @@ const TheCalendar = () => {
     return info.originNode;
   };
 
+  const getDetailList = async (date) => {
+    try {
+      const day = formatDate(date).split('-')[2];
+      setSelectedDateDetail(spending[day]);
+      setSelectedDate(formatDate(date).split('-'));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   // 일별 지출 합계 데이터
   const getListData = () => {
     let spendingList = [];
@@ -108,16 +123,16 @@ const TheCalendar = () => {
       </div>
     ) : null;
   };
-
   return (
     <>
       <StyledCalender
         cellRender={cellRender}
-        onSelect={(date) => {
-          setSelectedDate(formatDate(date).split('-'));
-        }}
+        onSelect={(date) => getDetailList(date)}
       />
-      <ItemList />
+      <ItemList
+        listDetail={selectedDateDetail}
+        itemChangedHandler={itemChangedHandler}
+      />
     </>
   );
 };
