@@ -23,9 +23,9 @@ export default function ChartWrpper() {
     <div>
       <form>
         <select onChange={handleChart}>
-          <option value="line">일별 지출 내역</option>
-          <option value="bar">카테고리별 지출 내역</option>
-          <option value="period">전체 달 지출 내역</option>
+          <option value="line">일 지출 내역</option>
+          <option value="bar">항목별 지출 내역</option>
+          <option value="period">월 별 지출 내역</option>
         </select>
       </form>
       {chartState}

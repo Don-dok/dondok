@@ -99,7 +99,7 @@ export default function TotalCategoryChart() {
       );
       setTotalAmount(total); // totalAmount 상태 업데이트
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      console.log(error);
     }
   };
 
@@ -149,18 +149,14 @@ export default function TotalCategoryChart() {
         </select>
         <button onClick={fetchData}>검색</button>
       </span>
-      {totalAmount ? (
-        <div>총 지출 금액: {totalAmount}원</div>
-      ) : (
-        <div>지출 내역이 없습니다.</div>
-      )}
-
-      {data && (
+      {totalAmount && data ? (
         <div>
+          <div>총 지출 금액: {totalAmount}원</div>
           <Bar data={data} options={barOptions_category} />
-          <hr />
           <Pie data={data} options={pieOptions_category} />
         </div>
+      ) : (
+        <h1>지출 내역이 없습니다.</h1>
       )}
     </div>
   );

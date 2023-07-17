@@ -125,7 +125,7 @@ export default function TotalAmountChart() {
         .reduce((acc, curr) => acc + curr, 0);
       setTotalAmount(total);
     } catch (error) {
-      alert('오류가 발생했습니다.', error)
+      console.log(error);
     }
   };
   // 이벤트 핸들러
@@ -174,21 +174,15 @@ export default function TotalAmountChart() {
         </select>
         <button onClick={fetchData}>검색</button>
       </span>
-      {totalAmount ? (
-        <div>총 지출 금액: {totalAmount}원</div>
+      {totalAmount && data ? (
+        <div>
+          <div>총 지출 금액: {totalAmount}원</div>
+          <Line data={data} options={lineOptions_amount} />
+          <hr />
+          <Pie data={data} options={pieOptions_amount} />
+        </div>
       ) : (
-        <div>지출 내역이 없습니다.</div>
-      )}
-      {totalAmount ? (
-        data && (
-          <div>
-            <Line data={data} options={lineOptions_amount} />
-            <hr />
-            <Pie data={data} options={pieOptions_amount} />
-          </div>
-        )
-      ) : (
-        <h2>내역없음</h2>
+        <h1>지출 내역이 없습니다.</h1>
       )}
     </div>
   );
