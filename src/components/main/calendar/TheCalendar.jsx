@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar } from 'antd';
+import { Calendar, Skeleton } from 'antd';
 import styled from 'styled-components';
 import { lookupByDate, getSpendingCalendar } from '../../../api/requests';
 import { formatPrice, formatDate } from '../../../utils/format';
@@ -14,22 +14,29 @@ const TheCalendar = () => {
   );
   const [selectedDateDetail, setSelectedDateDetail] = useState([]);
   const [changed, setChanged] = useState(false);
+
   // 월별 조회 API 응답데이터
   const [monthlySpending, setMonthlySpending] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   // 소비 달력 조회 API 호출
   const getSpending = async () => {
+    setIsLoading(true);
     try {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
       setSelectedDateDetail(res[new Date().getDate()]);
       setSpending(res);
     } catch (error) {
       alert('오류가 발생했습니다.', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   // 소비항목 변경시 재렌더링을 위한 상태값변경함수
   const itemChangedHandler = async () => {
     setChanged(!changed);
   };
+
   // 일별, 주별, 월별 조회
   const getMonthlyData = async () => {
     try {
@@ -63,6 +70,7 @@ const TheCalendar = () => {
       console.log(e);
     }
   };
+
   // 일별 지출 합계 데이터
   const getListData = () => {
     let spendingList = [];

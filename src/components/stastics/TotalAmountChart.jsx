@@ -1,5 +1,6 @@
 //////////////////////////// X축 일자, Y축 금액 //////////////////////////////
 import React, { useEffect, useState } from 'react';
+import { Skeleton } from 'antd';
 import axios from 'axios';
 import { Pie, Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -44,8 +45,10 @@ export default function TotalAmountChart() {
   const [month, setMonth] = useState(currentMonth);
   const [data, setData] = useState(null); // 차트 데이터
   const [totalAmount, setTotalAmount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `http://52.78.195.183:3003/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
@@ -126,6 +129,8 @@ export default function TotalAmountChart() {
       setTotalAmount(total);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   // 이벤트 핸들러
@@ -174,7 +179,8 @@ export default function TotalAmountChart() {
         </select>
         <button onClick={fetchData}>검색</button>
       </span>
-      {totalAmount && data ? (
+      {isLoading ? <Skeleton active /> : null}
+      {!isLoading && totalAmount && data ? (
         <div>
           <div>총 지출 금액: {totalAmount}원</div>
           <Line data={data} options={lineOptions_amount} />
@@ -182,7 +188,7 @@ export default function TotalAmountChart() {
           <Pie data={data} options={pieOptions_amount} />
         </div>
       ) : (
-        <h1>지출 내역이 없습니다.</h1>
+        !isLoading && <h1>지출 내역이 없습니다.</h1>
       )}
     </div>
   );
