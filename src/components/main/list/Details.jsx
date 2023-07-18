@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Collapse, Tag, Card } from 'antd';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { Collapse, Tag, Card, Skeleton } from 'antd';
 import {
   formatPrice,
   formatDate,
@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import { getSpendingCalendar } from '../../../api/requests';
 
-const Details = ({ dateData, details, isDaily, isWeekly }) => {
+const Details = ({ dateData, isDaily, isWeekly }) => {
   const [selectedDate, setSelectedDate] = useState(
     formatDate(new Date())?.split('-').map(Number),
   );
@@ -65,7 +65,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
           ),
           // 상세 내역
           children: value.data
-            .sort((a, b) => new Date(b.date) - new Date(a._date))
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
             .map((value, i) => (
               <Details_Box key={i}>
                 <li>
@@ -171,13 +171,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
       return true;
     });
 
-  console.log('sort', sortedData);
-
-  // const diffData = sortedData.reduce((prev, cur) =>
-  //   cur.num - prev.num === -1 ? prev.totalAmount - cur.totalAmount : null,
-  // );
-  // console.log('diff', diffData);
-
   const CardList = () => {
     if (isWeekly && dateData.length) {
       return sortedData.map((value, i) => {
@@ -193,9 +186,7 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
               <strong>{getStartDateAndEndDate(date[0], date[1] - 1)}</strong>
               <div>
                 <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
-                <p style={{ color: '#468B97', fontSize: 12 }}>
-                  전주보다 많이 쓰셨어요!
-                </p>
+                <p style={{ color: '#468B97', fontSize: 12 }}></p>
               </div>
             </StyledCard>
           );
@@ -214,9 +205,6 @@ const Details = ({ dateData, details, isDaily, isWeekly }) => {
               <strong>{value._id}</strong>
               <div>
                 <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
-                <p style={{ color: '#468B97', fontSize: 12 }}>
-                  전월보다 많이 쓰셨어요!
-                </p>
               </div>
             </StyledCard>
           );

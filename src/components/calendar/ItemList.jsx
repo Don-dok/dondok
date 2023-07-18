@@ -7,7 +7,7 @@ import moment from 'moment';
 
 const ItemList = (props) => {
   const list = props.listDetail;
-  if (list.length > 1) {
+  if (list && list.length > 1) {
     list.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
