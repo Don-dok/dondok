@@ -76,7 +76,7 @@ const CreateModal = (props) => {
         <div style={{ position: 'relative' }}>
         <Button
           onClick={showModal}
-          style={{ position: 'absolute', bottom: 130, right: 0,backgroundColor: '#79edff', borderRadius: 80, width: 50, height:50 ,fontSize: 25, paddingBottom:35,}}
+          style={{ position: 'fixed', bottom: 130, right: 0,backgroundColor: '#79edff', borderRadius: 80, width: 50, height:50 ,fontSize: 25, paddingBottom:35,}}
         >
           +
         </Button>
