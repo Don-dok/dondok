@@ -43,15 +43,27 @@ const TheCalendar = () => {
       const res = await lookupByDate('monthly');
       setMonthlySpending(res);
     } catch (error) {
-      alert('오류가 발생했습니다.', error);
+      console.log('월별 조회 실패', error);
     }
   };
 
+  // 달력의 월 또는 연도를 변경할 때마다 선택한 날짜에 맞는 소비 데이터를 업데이트하여 화면에 출력
+  const handlePanelChange = async (value, mode) => {
+    // value를 원하는 형식의 문자열로 변환
+    const formattedValue = value.format('YYYY-MM-DD');
+    setSelectedDateDetail(spending[formattedValue]); // 선택한 날짜에 맞는 소비 데이터 설정
+    // getSpending 함수를 호출하여 선택한 날짜에 맞는 소비 데이터 가져오기
+    try {
+      const res = await getSpendingCalendar(value.year(), value.month() + 1);
+      setSpending(res);
+    } catch (error) {
+      console.log('소비달력실패', error);
+    }
+  };
   // 랜더링 시 API 호출
   useEffect(() => {
     getSpending();
     getMonthlyData();
-    cellRender;
   }, [changed]);
 
   // Calendar 컴포넌트에 출력될 데이터 API (antd)
@@ -89,6 +101,7 @@ const TheCalendar = () => {
   // 일 지출 합계 조회 API (antd)
   const dateCellRender = (value) => {
     const listData = getListData();
+    const formattedValue = value.format('YYYY-MM-DD');
     // for 반복문 index에 접근
     for (let i = 0; i < listData.length; i++) {
       // listData의 spendingDate와 value(날짜)비교
@@ -99,7 +112,7 @@ const TheCalendar = () => {
             style={{
               fontSize: 8,
               marginTop: 16,
-              color: '#EB455F',
+              color: '#fc037b',
               wordBreak: 'break-all', // 너비보다 글자가 긴 경우, 줄바꿈
               lineHeight: 1,
             }}
@@ -127,7 +140,8 @@ const TheCalendar = () => {
     const num = getMonthData(value);
     return num ? (
       <div className="notes-month">
-        <span style={{ color: '#EB455F' }}>₩ {num}</span>
+        <section>지출액</section>
+        <span style={{ color: '#eb2f96' }}>₩ {num}</span>
       </div>
     ) : null;
   };
@@ -136,6 +150,7 @@ const TheCalendar = () => {
       <StyledCalender
         cellRender={cellRender}
         onSelect={(date) => getDetailList(date)}
+        onPanelChange={handlePanelChange}
       />
       <ItemList
         listDetail={selectedDateDetail}
@@ -158,6 +173,8 @@ const StyledCalender = styled(Calendar)`
   }
 
   .ant-picker-cell-inner.ant-picker-calendar-date {
+    // height: 50px;
+    // margin: 0 5px;
     padding: 0;
   }
   .ant-picker-calendar-date-value {
@@ -165,15 +182,18 @@ const StyledCalender = styled(Calendar)`
     height: 10px;
   }
   .ant-picker-calendar-date-content {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .events {
+    height: 100%;
     margin: 0;
     padding: 0;
   }
   .ant-picker-cell {
+    overflow: hidden;
   }
   .ant-badge.ant-badge-status {
   }
@@ -190,48 +210,5 @@ const StyledCalender = styled(Calendar)`
 
   .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
     // border-color: #35495e;
-  }
-
-  @media screen and (max-height: 800px) {
-    .ant-picker-cell-inner.ant-picker-calendar-date {
-      height: 70px;
-      margin: 0 5px;
-      padding: 0;
-    }
-    .ant-picker-calendar-date-value {
-      font-size: 12px;
-      height: 10px;
-    }
-
-    // 데이터 출력되는 태그
-    .ant-picker-calendar-date-content {
-      position: relative;
-      height: 30px;
-      p {
-        position: absolute;
-        top: 10px;
-        margin: 0 0 0;
-      }
-    }
-    .events {
-      height: 50px;
-      margin: 0;
-      padding: 0;
-    }
-    .ant-picker-cell {
-      overflow: hidden;
-    }
-    .ant-badge.ant-badge-status {
-    }
-
-    .ant-badge-status-text {
-      display: inline-block;
-      font-family:
-        Times,
-        Times New Roman,
-        Georgia,
-        serif;
-      margin-top: 5px;
-    }
   }
 `;

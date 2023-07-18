@@ -77,85 +77,6 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
         };
       });
   };
-  // 컴포넌트의 item 속성에 들어갈 값 - weekly
-
-  // const weeklyItems = dateData.sort((a,b)=> new Date(b._id) - new Date(a._id)).map((value, i)=> {
-  //   if (value._id) {
-  //     const date = value._id.split('-').map(item => Number(item))
-  //     return {
-  //       key: value._id,
-  //       label: (
-  //         <Container >
-  //           <p style={{fontWeight: 700}}>{getStartDateAndEndDate(date[0],date[1]-1)}</p>
-  //           <p style={{color: '#eb2f96'}}>₩ {formatPrice(value.totalAmount)}</p>
-  //         </Container>
-  //       ),
-  //       children: (
-  //         <Details_Box>
-  //           {/* eslint-disable-next-line react/prop-types */}
-  //           {details.map((value, i)=>{
-  //             if (value._id) {
-  //               const date = value._id.split('-').map(item => Number(item))
-  //               return ( <li
-  //                 key={i}
-  //                 style={{display: 'flex', gap: 20}}
-  //                 >
-  //                 <p>{getStartDateAndEndDate(date[0],date[1]-1)}</p>
-  //                 <p>₩ {formatPrice(value.totalAmount)}</p>
-  //               </li>
-  //             )
-  //             }
-  //             })}
-  //         </Details_Box>
-  //       )
-  //     }
-  //   }
-  // })
-
-  // 컴포넌트의 item 속성에 들어갈 값 - monthly
-  // const monthlyItems = dateData
-  //   .sort((a, b) => new Date(b._id) - new Date(a._id))
-  //   .map((value, i) => {
-  //     return {
-  //       key: value._id,
-  //       label: (
-  //         <Container>
-  //           <p style={{ fontWeight: 700 }}>{value._id}</p>
-  //           <p style={{ color: '#eb2f96' }}>
-  //             ₩ {formatPrice(value.totalAmount)}
-  //           </p>
-  //         </Container>
-  //       ),
-  //       children: (
-  //         <Details_Box>
-  //           {/* eslint-disable-next-line react/prop-types */}
-  //           {details.map((value, i) => {
-  //             if (value._id) {
-  //               const date = value._id.split('-').map((item) => Number(item));
-  //               return (
-  //                 <li key={i} style={{ display: 'flex', gap: 20 }}>
-  //                   <p>{getStartDateAndEndDate(date[0], date[1] - 1)}</p>
-  //                   <p>₩ {formatPrice(value.totalAmount)}</p>
-  //                 </li>
-  //               );
-  //             }
-  //           })}
-  //         </Details_Box>
-  //       ),
-  //     };
-  //   });
-
-  // const weeklyData = dateData.map(item => {
-  //     if (item._id) {
-  //       const date = item._id.split('-').map(item => Number(item))
-  //       item['num'] = Number(item._id.replace(/-/, ""))
-  //       item['period'] = getStartDateAndEndDate(date[0], date[1] - 1)
-  //       return item;
-  //     }
-  //      })
-  // const sortedData = [...dateData].sort((a,b)=> {
-  //   Number(b._id.replace(/-/,"")) - Number(a._id.replace(/-/,""))} )
-  //   console.log({sortedData})
 
   const sortedData = [...dateData]
     .sort((a, b) => {
@@ -176,6 +97,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
       return sortedData.map((value, i) => {
         if (value._id) {
           const date = value._id.split('-').map((item) => Number(item));
+          const currentTotalAmount = value.totalAmount;
           return (
             <StyledCard
               key={i}
@@ -183,10 +105,9 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
                 width: 250,
               }}
             >
-              <strong>{getStartDateAndEndDate(date[0], date[1] - 1)}</strong>
+              <strong>{getStartDateAndEndDate(date[0], date[1])}</strong>
               <div>
-                <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
-                <p style={{ color: '#468B97', fontSize: 12 }}></p>
+                <p className="amount">₩ {formatPrice(currentTotalAmount)}</p>
               </div>
             </StyledCard>
           );
