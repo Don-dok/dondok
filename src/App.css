@@ -1,3 +1,8 @@
+.body{
+  margin: 0;
+}
+
+
 :root {
   --calendar-date-content-height: 58px;
 }
@@ -28,18 +33,25 @@
   border: none;
 }
 
+
+.ant-modal-content {
+  width: 300px;
+
+}
+
 .App {
   position: relative;
   margin: auto auto;
-  width: 430px;
-  height: 100vh;
+  width: 436px;
+  height: 98vh;
   border: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  overflow-y: scroll;
-  margin-top: 40px;
+  margin-top: 10px;
+  
 }
 
 .App::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  overflow: hidden;
 }
+
+
