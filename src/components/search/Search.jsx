@@ -5,6 +5,7 @@ import {
   DatePicker,
   message,
   Popconfirm,
+  Button,
 } from 'antd';
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -23,11 +24,15 @@ const Search = () => {
   const [dateTime, setDateTime] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchSuggestions = async (inputValue) => {
-    setIsLoading(true);
+  const options = suggestions.map((category, index) => ({
+    value: category,
+    key: `category-${index}`,
+  }));
+
+  const getList = async () => {
     try {
       const response = await fetch(
-        `http://52.78.195.183:3003/api/expenses/search?q=${inputValue}&userId=Team2`,
+        `http://52.78.195.183:3003/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -45,8 +50,29 @@ const Search = () => {
           return dateB - dateA;
         }),
       );
+    } catch (error) {
+      alert('오류가 발생했습니다.', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // 추천 검색어
+  const suggestWords = async (value) => {
+    try {
+      const response = await fetch(
+        `http://52.78.195.183:3003/api/expenses/search?q=${value}&userId=Team2`,
+        {
+          method: 'GET',
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error('네트워크 응답이 올바르지 않습니다');
+      }
+      const res = await response.json();
       const categorySuggestions = Array.from(
-        new Set(list.map((item) => item.category)),
+        new Set(res.map((item) => item.category)),
       ); // 중복 제거
       setSuggestions(categorySuggestions);
     } catch (error) {
@@ -55,27 +81,11 @@ const Search = () => {
       setIsLoading(false);
     }
   };
-  console.log(list);
 
-  const options = suggestions.map((category, index) => ({
-    value: category,
-    key: `category-${index}`,
-  }));
-
-  const onSelect = (selectedValue) => {
-    setValue(selectedValue);
-  };
-
-  const pressEnterKey = (e) => {
+  const pressEnterKey = async (e) => {
     if (e.key === 'Enter') {
-      fetchSuggestions(value);
-      console.log(value);
+      getList();
     }
-  };
-
-  const onChange = (inputValue) => {
-    setValue(inputValue);
-    // fetchSuggestions(inputValue);
   };
 
   const editHandler = async (index, item) => {
@@ -145,9 +155,16 @@ const Search = () => {
     newList[index].amount = Number(number);
     setList(newList);
   };
+
   const dateChangeHandler = (date) => {
     setDateTime(date.add(9, 'hour').toISOString());
   };
+
+  const onChange = (e) => {
+    setValue(e);
+    suggestWords(value);
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -155,14 +172,14 @@ const Search = () => {
       ) : (
         <>
           <AutoComplete
-            value={value} // 입력 값
+            value={value}
             options={options} // 제안 옵션들
             style={{ width: 200 }}
-            onSelect={onSelect} // 제안 옵션 선택 시 호출되는 핸들러
-            onSearch={onChange} // 입력 값 변경 시 호출되는 핸들러
             placeholder="검색어를 입력하세요."
             onKeyDown={(e) => pressEnterKey(e)}
+            onChange={onChange}
           />
+          <Button onClick={getList}>검색</Button>
           <div
             id="scrollableDiv"
             style={{

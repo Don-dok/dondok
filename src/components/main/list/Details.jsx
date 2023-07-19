@@ -60,7 +60,9 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
           key: i,
           label: (
             <Container>
-              <p style={{ fontWeight: 700 }}>{value.date}</p>
+              <p style={{ fontWeight: 700 }}>
+                {moment(value.date).format('YYYY년 MM월 DD일')}
+              </p>
               <p style={{ color: '#EF6262' }}>₩ {formatPrice(value.sum)}</p>
             </Container>
           ),
