@@ -5,6 +5,7 @@ import { lookupByDate, getSpendingCalendar } from '../../../api/requests';
 import { formatPrice, formatDate } from '../../../utils/format';
 import ItemList from '../../calendar/ItemList';
 import Loading from '../../common/Loading';
+import dayjs from 'dayjs';
 
 const TheCalendar = () => {
   // getSpendingCalendar API 응답 데이터
@@ -25,7 +26,7 @@ const TheCalendar = () => {
     setIsLoading(true);
     try {
       const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
-      setSelectedDateDetail(res[new Date().getDate()]);
+      setSelectedDateDetail(res[selectedDate[2]]);
       setSpending(res);
     } catch (error) {
       alert('오류가 발생했습니다.', error);
@@ -36,6 +37,12 @@ const TheCalendar = () => {
 
   // 소비항목 변경시 재렌더링을 위한 상태값변경함수
   const itemChangedHandler = async () => {
+    try {
+      const res = await getSpendingCalendar(selectedDate[0], selectedDate[1]);
+      setSelectedDateDetail(res[selectedDate[2]]);
+    } catch (error) {
+      alert('오류가 발생했습니다.', error);
+    }
     setChanged(!changed);
   };
 
@@ -136,7 +143,6 @@ const TheCalendar = () => {
       }
     }
   };
-
   // 월별 지출 조회 API (antd)
   const monthCellRender = (value) => {
     // 해당 월 totalamount
@@ -154,6 +160,7 @@ const TheCalendar = () => {
       ) : (
         <>
           <StyledCalender
+            value={dayjs(selectedDate).add(9, 'hour')}
             cellRender={cellRender}
             onSelect={(date) => getDetailList(date)}
             onPanelChange={handlePanelChange}

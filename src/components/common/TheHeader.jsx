@@ -5,12 +5,11 @@ import { DollarTwoTone } from '@ant-design/icons';
 const TheHeader = () => {
   return (
     <Header>
-      <DollarTwoTone twoToneColor="#e57e25" />
+      <img style={{ width: 20, height: 20 }} src="/assets/cat.png"></img>
       <div
         style={{
-          fontWeight: 700,
-          fontFamily: 'Pretendard-Regular',
-          marginBottom: -3,
+          fontFamily: 'Gugi',
+          color: '#202E3D',
         }}
       >
         DonDok
@@ -32,5 +31,5 @@ const Header = styled.section`
   z-index: 1000;
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
