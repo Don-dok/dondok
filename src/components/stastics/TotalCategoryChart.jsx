@@ -1,4 +1,4 @@
-//////////////////////////// x축 카테고리, y축 금액 //////////////////////////////
+//////////////////////////// 항목별 지출 내역 (x축 카테고리, y축 금액) //////////////////////////////
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -120,11 +120,13 @@ export default function TotalCategoryChart() {
       <span>
         <label htmlFor="year"> </label>
         <select id="year" value={year} onChange={handleChangeYear}>
+          <option value={currentYear - 3}>{currentYear - 3}년</option>
           <option value={currentYear - 2}>{currentYear - 2}년</option>
           <option value={currentYear - 1}>{currentYear - 1}년</option>
           <option value={currentYear}>{currentYear}년</option>
           <option value={currentYear + 1}>{currentYear + 1}년</option>
           <option value={currentYear + 2}>{currentYear + 2}년</option>
+          <option value={currentYear + 3}>{currentYear + 3}년</option>
         </select>
       </span>
       <span

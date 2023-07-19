@@ -1,4 +1,4 @@
-//////////////////////////// X축 일자, Y축 금액 //////////////////////////////
+//////////////////////////// 일 지출 내역 (X축 일자, Y축 금액) //////////////////////////////
 import React, { useEffect, useState } from 'react';
 import { Skeleton } from 'antd';
 import axios from 'axios';
@@ -57,12 +57,21 @@ export default function TotalAmountChart() {
       const responseData = response.data;
 
       const categoryAmounts = {}; // 날짜별 카테고리별 금액 합계를 저장할 객체
+
+      // UTC 변경 함수
+      const convertToKoreanTime = (date) => {
+        const utcTime = date.getTime();
+        const koreanTime = utcTime - 9 * 60 * 60 * 1000; // 9시간(밀리초 단위)을 뺀 한국 시간
+        return new Date(koreanTime);
+      };
+
       // 일자 가시성 변경 함수
       const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = ('0' + (date.getMonth() + 1)).slice(-2);
-        const day = ('0' + date.getDate()).slice(-2);
+        const koreanTime = convertToKoreanTime(date);
+        const year = koreanTime.getFullYear();
+        const month = ('0' + (koreanTime.getMonth() + 1)).slice(-2);
+        const day = ('0' + koreanTime.getDate()).slice(-2);
         return `${year}년 ${month}월 ${day}일`;
       };
 
@@ -150,11 +159,13 @@ export default function TotalAmountChart() {
       <span>
         <label htmlFor="year"></label>
         <select id="year" value={year} onChange={handleChangeYear}>
+          <option value={currentYear - 3}>{currentYear - 3}년</option>
           <option value={currentYear - 2}>{currentYear - 2}년</option>
           <option value={currentYear - 1}>{currentYear - 1}년</option>
           <option value={currentYear}>{currentYear}년</option>
           <option value={currentYear + 1}>{currentYear + 1}년</option>
           <option value={currentYear + 2}>{currentYear + 2}년</option>
+          <option value={currentYear + 3}>{currentYear + 3}년</option>
         </select>
       </span>
       <span

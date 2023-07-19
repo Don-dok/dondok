@@ -1,3 +1,4 @@
+//////////////////////////// 월 별 지출 내역 (X축 달, Y축 지출 금액) //////////////////////////////
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -94,7 +95,6 @@ export default function PeriodChart() {
       let totalAmountSum = amount.reduce((acc, cur) => acc + cur, 0);
       setData(chartData);
       setTotalAmount(totalAmountSum);
-      console.log(amount);
     } catch (error) {
       console.log(error);
     }
@@ -112,11 +112,13 @@ export default function PeriodChart() {
     <div>
       <label htmlFor="year">연도 선택</label>
       <select id="year" value={selectYear} onChange={handleYearChange}>
-        <option value={currentYear - 2}>{currentYear - 2}</option>
-        <option value={currentYear - 1}>{currentYear - 1}</option>
-        <option value={currentYear}>{currentYear}</option>
-        <option value={currentYear + 1}>{currentYear + 1}</option>
-        <option value={currentYear + 2}>{currentYear + 2}</option>
+        <option value={currentYear - 3}>{currentYear - 3}년</option>
+        <option value={currentYear - 2}>{currentYear - 2}년</option>
+        <option value={currentYear - 1}>{currentYear - 1}년</option>
+        <option value={currentYear}>{currentYear}년</option>
+        <option value={currentYear + 1}>{currentYear + 1}년</option>
+        <option value={currentYear + 2}>{currentYear + 2}년</option>
+        <option value={currentYear + 3}>{currentYear + 3}년</option>
       </select>
       <button onClick={fetchPeriodSummary}>검색</button>
       {totalAmount && data ? (
