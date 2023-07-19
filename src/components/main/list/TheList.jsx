@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { lookupByDate } from '../../../api/requests';
-import { Segmented, Skeleton, Space } from 'antd';
+import { Segmented, Space } from 'antd';
 import Details from './Details';
 import styled from 'styled-components';
+import Loading from '../../common/Loading';
 
 const TheList = () => {
   const [options, setOptions] = useState(['Daily', 'Weekly', 'Monthly']);
@@ -12,7 +13,7 @@ const TheList = () => {
   const [daily, setDaily] = useState([]);
   const [weekly, setWeekly] = useState([]);
   const [monthly, setMonthly] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getSelectedDate();
@@ -47,7 +48,13 @@ const TheList = () => {
   // selectedDate에 따라 props 변경되는 컴포넌트
   const TheDetails = () => {
     if (selectedDate === 'daily') {
-      return <Details dateData={daily} isDaily={isDaily} />;
+      return (
+        <Details
+          dateData={daily}
+          isDaily={isDaily}
+          setIsLoading={setIsLoading}
+        />
+      );
     } else if (selectedDate === 'weekly') {
       return <Details dateData={weekly} isWeekly={isWeekly} />;
     } else {
@@ -63,7 +70,7 @@ const TheList = () => {
           onChange={(value) => setSelectedDate(value.toLowerCase())}
         />
       </Space>
-      {isLoading ? <Skeleton isLoading={isLoading} active /> : <TheDetails />}
+      {isLoading ? <Loading /> : <TheDetails />}
     </Container>
   );
 };

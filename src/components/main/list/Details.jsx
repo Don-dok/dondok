@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Collapse, Tag, Card, Skeleton } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Collapse, Tag, Card } from 'antd';
 import {
   formatPrice,
   formatDate,
@@ -79,17 +79,17 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
   };
 
   const sortedData = [...dateData]
-    .sort((a, b) => {
-      if (a._id && b._id) {
-        return Number(b._id.replace(/-/, '')) - Number(a._id.replace(/-/, ''));
-      }
-    })
     .map((item) => {
       if (item._id) {
         item['num'] = Number(item._id.replace(/-/, ''));
         return item;
       }
       return true;
+    })
+    .sort((a, b) => {
+      if (a.num && b.num) {
+        return b.num - a.num;
+      }
     });
 
   const CardList = () => {
