@@ -1,6 +1,5 @@
 //////////////////////////// X축 일자, Y축 금액 //////////////////////////////
 import React, { useEffect, useState } from 'react';
-import { Skeleton } from 'antd';
 import axios from 'axios';
 import { Pie, Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -21,6 +20,7 @@ import {
   Filler,
   ArcElement,
 } from 'chart.js';
+import Loading from '../common/Loading';
 
 // 차트에서 사용할 기능 등록
 ChartJS.register(
@@ -147,6 +147,7 @@ export default function TotalAmountChart() {
 
   return (
     <div>
+      {isLoading ? <Loading /> : null}
       <span>
         <label htmlFor="year"></label>
         <select id="year" value={year} onChange={handleChangeYear}>
@@ -179,7 +180,7 @@ export default function TotalAmountChart() {
         </select>
         <button onClick={fetchData}>검색</button>
       </span>
-      {isLoading ? <Skeleton active /> : null}
+
       {!isLoading && totalAmount && data ? (
         <div>
           <div>총 지출 금액: {totalAmount}원</div>
