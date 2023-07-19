@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { List, Input, DatePicker, message, Popconfirm } from 'antd';
 import CreateModal from './CreateModal';
 import DateTimeDisplay from './DateTimeDisplay';
@@ -73,16 +73,14 @@ const ItemList = (props) => {
     setCategory(value);
     const newList = [...list];
     newList[index].category = value;
-    setList(newList);
   };
 
   const amountChangeHandler = (e, index) => {
     const { value } = e.target;
-    const number = value.replace(/,/g, '');
+    const number = value.replace(/[^0-9]/g, '');
     setAmount(Number(number));
     const newList = [...list];
     newList[index].amount = Number(number);
-    setList(newList);
   };
   const dateChangeHandler = (date) => {
     setDateTime(date.add(9, 'hour').toISOString());
@@ -95,11 +93,9 @@ const ItemList = (props) => {
         style={{
           height: 190,
           width: 390,
-    
+
           padding: '0 0 0 25px',
           borderTop: '1px solid rgba(140, 140, 140, 0.35)',
-
-          
         }}
       >
         <List
@@ -173,10 +169,7 @@ const ItemList = (props) => {
           )}
         />
       </div>
-      <CreateModal
-        // getSpending={props.getSpending}
-        itemChangedHandler={props.itemChangedHandler}
-      />
+      <CreateModal itemChangedHandler={props.itemChangedHandler} />
     </>
   );
 };
