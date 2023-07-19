@@ -93,10 +93,13 @@ const ItemList = (props) => {
       <div
         id="scrollableDiv"
         style={{
-          height: 400,
-          overflow: 'auto',
-          padding: '0 16px',
-          border: '1px solid rgba(140, 140, 140, 0.35)',
+          height: 190,
+          width: 390,
+    
+          padding: '0 0 0 25px',
+          borderTop: '1px solid rgba(140, 140, 140, 0.35)',
+
+          
         }}
       >
         <List

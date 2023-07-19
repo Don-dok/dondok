@@ -48,14 +48,18 @@ function App() {
 export default App;
 
 const Container = styled.section`
+
   box-sizing: border-box;
   margin: 50px 0;
-  width: 430px;
   height: 88%;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const StyeldSkeletons = styled(Skeleton)`

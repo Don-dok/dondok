@@ -12,6 +12,12 @@ const CreateModal = (props) => {
     moment().add(9, 'hours').toISOString(),
   );
 
+
+  const modalStyle = {
+    borderRadius: '10px', 
+    width: '300px', 
+  };
+
   // Modal
   const showModal = () => {
     setIsModalOpen(true);
@@ -67,7 +73,14 @@ const CreateModal = (props) => {
 
   return (
     <>
-      <Button onClick={showModal}>+</Button>
+        <div style={{ position: 'relative' }}>
+        <Button
+          onClick={showModal}
+          style={{ position: 'fixed', bottom: 130, right: 0,backgroundColor: '#79edff', borderRadius: 80, width: 50, height:50 ,fontSize: 25, paddingBottom:35,}}
+        >
+          +
+        </Button>
+      </div>
       <Modal
         title="새로운 항목 추가"
         open={isModalOpen}
@@ -75,6 +88,7 @@ const CreateModal = (props) => {
         onCancel={handleCancel}
         okText="등록하기"
         cancelText="취소"
+        style={modalStyle}
       >
         <DatePicker
           placeholder={moment().format('YYYY-MM-DD HH:mm')}
