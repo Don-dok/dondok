@@ -5,12 +5,12 @@ import {
   DatePicker,
   message,
   Popconfirm,
-  Skeleton,
 } from 'antd';
 import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import DateTimeDisplay from '../calendar/DateTimeDisplay';
+import Loading from '../common/Loading';
 
 const Search = () => {
   const [value, setValue] = useState('');
@@ -150,7 +150,7 @@ const Search = () => {
   return (
     <div>
       {isLoading ? (
-        <Skeleton active />
+        <Loading />
       ) : (
         <>
           <AutoComplete

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, Skeleton } from 'antd';
+import { Calendar } from 'antd';
 import styled from 'styled-components';
 import { lookupByDate, getSpendingCalendar } from '../../../api/requests';
 import { formatPrice, formatDate } from '../../../utils/format';
 import ItemList from '../../calendar/ItemList';
+import Loading from '../../common/Loading';
 
 const TheCalendar = () => {
   // getSpendingCalendar API 응답 데이터
@@ -18,6 +19,7 @@ const TheCalendar = () => {
   // 월별 조회 API 응답데이터
   const [monthlySpending, setMonthlySpending] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
   // 소비 달력 조회 API 호출
   const getSpending = async () => {
     setIsLoading(true);
@@ -43,7 +45,7 @@ const TheCalendar = () => {
       const res = await lookupByDate('monthly');
       setMonthlySpending(res);
     } catch (error) {
-      console.log('월별 조회 실패', error);
+      alert('오류가 발생했습니다.', error);
     }
   };
 
@@ -57,9 +59,10 @@ const TheCalendar = () => {
       const res = await getSpendingCalendar(value.year(), value.month() + 1);
       setSpending(res);
     } catch (error) {
-      console.log('소비달력실패', error);
+      alert('오류가 발생했습니다.', error);
     }
   };
+
   // 랜더링 시 API 호출
   useEffect(() => {
     getSpending();
@@ -78,8 +81,8 @@ const TheCalendar = () => {
       const day = formatDate(date).split('-')[2];
       setSelectedDateDetail(spending[day]);
       setSelectedDate(formatDate(date).split('-'));
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      alert('오류가 발생했습니다.', error);
     }
   };
 
@@ -140,22 +143,27 @@ const TheCalendar = () => {
     const num = getMonthData(value);
     return num ? (
       <div className="notes-month">
-        <section>지출액</section>
         <span style={{ color: '#eb2f96' }}>₩ {num}</span>
       </div>
     ) : null;
   };
   return (
     <>
-      <StyledCalender
-        cellRender={cellRender}
-        onSelect={(date) => getDetailList(date)}
-        onPanelChange={handlePanelChange}
-      />
-      <ItemList
-        listDetail={selectedDateDetail}
-        itemChangedHandler={itemChangedHandler}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <StyledCalender
+            cellRender={cellRender}
+            onSelect={(date) => getDetailList(date)}
+            onPanelChange={handlePanelChange}
+          />
+          <ItemList
+            listDetail={selectedDateDetail}
+            itemChangedHandler={itemChangedHandler}
+          />
+        </>
+      )}
     </>
   );
 };
