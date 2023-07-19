@@ -7,6 +7,7 @@ import {
 } from '../../../utils/format';
 import styled from 'styled-components';
 import { getSpendingCalendar } from '../../../api/requests';
+import moment from 'moment';
 
 const Details = ({ dateData, isDaily, isWeekly }) => {
   const [selectedDate, setSelectedDate] = useState(
@@ -123,7 +124,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
                 width: 300,
               }}
             >
-              <strong>{value._id}</strong>
+              <strong>{moment(value._id).format('YYYY년 MM월')}</strong>
               <div>
                 <p className="amount">₩ {formatPrice(value.totalAmount)}</p>
               </div>

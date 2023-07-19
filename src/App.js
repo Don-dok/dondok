@@ -4,7 +4,7 @@ import TheHeader from './components/common/TheHeader';
 import './App.css';
 import { styled } from 'styled-components';
 import SubTabs from './components/main/SubTabs';
-import Search from 'antd/es/transfer/search';
+import Search from './components/search/Search';
 import ChartWrpper from './components/stastics/ChartWrapper';
 import User from '../src/components/user/User';
 
