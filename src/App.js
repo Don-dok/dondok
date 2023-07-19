@@ -7,18 +7,9 @@ import SubTabs from './components/main/SubTabs';
 import Search from 'antd/es/transfer/search';
 import ChartWrpper from './components/stastics/ChartWrapper';
 import User from '../src/components/user/User';
-import { Skeleton } from 'antd';
 
 function App() {
   const [activeKey, setActiveKey] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [activeKey]);
 
   const Components = () => {
     if (activeKey === '1' || activeKey === '') {
@@ -36,9 +27,7 @@ function App() {
     <div className="App">
       <TheHeader />
       <Container>
-        <StyeldSkeletons loading={isLoading} active>
-          <Components />
-        </StyeldSkeletons>
+        <Components />
       </Container>
       <TheTabs activeKey={activeKey} setActiveKey={setActiveKey} />
     </div>
@@ -56,11 +45,4 @@ const Container = styled.section`
   flex-direction: column;
   overflow-y: scroll;
   align-items: center;
-`;
-
-const StyeldSkeletons = styled(Skeleton)`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
 `;
