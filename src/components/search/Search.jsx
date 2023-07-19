@@ -69,12 +69,13 @@ const Search = () => {
   const pressEnterKey = (e) => {
     if (e.key === 'Enter') {
       fetchSuggestions(value);
+      console.log(value);
     }
   };
 
   const onChange = (inputValue) => {
     setValue(inputValue);
-    fetchSuggestions(inputValue);
+    // fetchSuggestions(inputValue);
   };
 
   const editHandler = async (index, item) => {
