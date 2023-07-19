@@ -1,8 +1,9 @@
-.body{
+.body {
   margin: 0;
 }
-
-
+div {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 :root {
   --calendar-date-content-height: 58px;
 }
@@ -33,10 +34,8 @@
   border: none;
 }
 
-
 .ant-modal-content {
   width: 300px;
-
 }
 
 .App {
@@ -47,11 +46,8 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
   margin-top: 10px;
-  
 }
 
 .App::-webkit-scrollbar {
   overflow: hidden;
 }
-
-
