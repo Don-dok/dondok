@@ -48,7 +48,7 @@ export default function TotalCategoryChart() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://chickenlecture.xyz/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
+        `/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
       );
 
       const responseData = response.data;
