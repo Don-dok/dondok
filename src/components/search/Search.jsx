@@ -125,7 +125,11 @@ const Search = () => {
       'Content-Type': 'application/json',
     };
     try {
-      await axios.delete(`/api/expenses/${id}`, {}, { headers: headers });
+      await axios.delete(
+        `https://chickenlecture.xyz/api/expenses/${id}`,
+        {},
+        { headers: headers },
+      );
       message.success('삭제완료');
     } catch (e) {
       console.log(e);

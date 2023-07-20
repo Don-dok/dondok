@@ -56,7 +56,7 @@ export default function TotalAmountChart() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
+        `https://chickenlecture.xyz/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
       );
 
       const responseData = response.data;

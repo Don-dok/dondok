@@ -33,7 +33,11 @@ const CreateModal = (props) => {
       date: dateTime,
     };
     try {
-      const res = await axios.post('/api/expenses', body, { headers: headers });
+      const res = await axios.post(
+        'https://chickenlecture.xyz/api/expenses',
+        body,
+        { headers: headers },
+      );
       if (res) {
         setIsModalOpen(false);
         props.itemChangedHandler();
