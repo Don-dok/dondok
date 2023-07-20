@@ -1,6 +1,4 @@
-
-body{
-
+body {
   margin: 0;
 }
 div {
@@ -9,6 +7,10 @@ div {
 :root {
   --calendar-date-content-height: 58px;
 }
+
+/* #root {
+  background-color: aqua;
+} */
 
 .ant-picker-calendar.ant-picker-calendar-full
   .ant-picker-calendar-date-content {
@@ -41,23 +43,18 @@ div {
   border: none;
 }
 
-
-.ant-list-item-meta-content{
+.ant-list-item-meta-content {
   flex-direction: column-reverse;
   display: flex;
   height: 60px;
   flex: 1 0;
 }
 
-
-
-
-.ant-list .ant-list-item{
+.ant-list .ant-list-item {
   border-radius: 5px;
-  padding-bottom: 0px
-
+  padding-bottom: 0px;
 }
-.ant-list-item-meta-title{
+.ant-list-item-meta-title {
   margin-bottom: 0;
 }
 
@@ -68,12 +65,11 @@ div {
   flex: none;
 }
 
-.ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-description{
-  color: rgba(0, 0, 0,0.55);
+.ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-description {
+  color: rgba(0, 0, 0, 0.55);
 }
 
-
-.ant-list .ant-list-item .ant-list-item-action{
+.ant-list .ant-list-item .ant-list-item-action {
   margin-left: 14px;
 }
 
@@ -85,21 +81,21 @@ div {
     background-color: #e6f4ff;
     transition: all 0.15s;
   }
-  .ant-input-group-wrapper-disabled .ant-input-group-addon{
+  .ant-input-group-wrapper-disabled .ant-input-group-addon {
     background-color: #e6f4ff;
     transition: all 0.15s;
   }
 }
-.ant-input{
+.ant-input {
   border: none;
   padding: 4px 0;
   font-size: 17px;
   text-overflow: ellipsis;
 }
 
-  .ant-input{
-    transition: none;
-  }
+.ant-input {
+  transition: none;
+}
 
 .ant-input-group .ant-input {
   margin-bottom: 0;
@@ -108,7 +104,7 @@ div {
   font-size: 17px;
 }
 
-.ant-input .ant-input-disabled{
+.ant-input .ant-input-disabled {
   padding-left: 20px;
   text-align: right;
 }
@@ -121,27 +117,26 @@ div {
   text-align: left;
 }
 
-.ant-list-item-meta-title .ant-input{
+.ant-list-item-meta-title .ant-input {
   padding-bottom: 11px;
   padding-top: 0px;
 }
 
-
-.ant-segmented .ant-segmented-item-selected{
+.ant-segmented .ant-segmented-item-selected {
   background-color: #a1d2f7e8;
 }
 
-.ant-menu-item .ant-menu-item-active:hover{
+.ant-menu-item .ant-menu-item-active:hover {
   background-color: #77bcf0e8;
 }
 
-.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover{
+.ant-menu-light:not(.ant-menu-horizontal)
+  .ant-menu-item:not(.ant-menu-item-selected):hover {
   background-color: #e6f4ff;
   transition: all 0.15s;
-  
 }
 .ant-menu-light .ant-menu-item-selected {
-  background-color: rgba(135, 206, 250, .5);
+  background-color: rgba(135, 206, 250, 0.5);
   transition: all 0.15s;
 }
 
@@ -163,9 +158,8 @@ div {
 .ant-input[disabled] {
   background-color: white;
   color: black;
-  cursor:auto;
+  cursor: auto;
 }
-
 
 .ant-input-group-wrapper-disabled .ant-input-group-addon {
   background-color: white;
@@ -177,28 +171,30 @@ div {
   cursor: auto;
 }
 
-.ant-collapse-item{
+.ant-collapse-item {
   width: 390px;
 }
 
-.ant-collapse>.ant-collapse-item >.ant-collapse-header {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
   align-items: center;
 }
 
-
-.ant-select-show-search{
+.ant-select-show-search {
   padding-left: 35px;
   padding-right: 35px;
   margin: 25px 0;
 }
 
-.ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title .ant-input{
+.ant-list
+  .ant-list-item
+  .ant-list-item-meta
+  .ant-list-item-meta-title
+  .ant-input {
   font-size: 13px;
   font-weight: 600;
 }
 
-
-.ant-modal{
+.ant-modal {
   top: 30%;
   width: 350px !important;
 }
@@ -213,9 +209,8 @@ div {
   overflow: hidden;
 }
 
-.ant-modal-root .ant-modal-mask{
+.ant-modal-root .ant-modal-mask {
   height: auto;
-
 }
 
 .App {
@@ -225,10 +220,15 @@ div {
   height: 98vh;
   border: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  margin-top: 10px;
-
+  /* margin-top: 10px; */
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.12),
+    0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.12),
+    0 8px 8px rgba(0, 0, 0, 0.12),
+    0 16px 16px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
-
+  background-color: #ecf0f1;
 }
 
 .App::-webkit-scrollbar {
