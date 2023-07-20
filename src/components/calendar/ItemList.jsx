@@ -55,7 +55,11 @@ const ItemList = (props) => {
       'Content-Type': 'application/json',
     };
     try {
-      await axios.delete(`/api/expenses/${id}`, {}, { headers: headers });
+      await axios.delete(
+        `https://chickenlecture.xyz/api/expenses/${id}`,
+        {},
+        { headers: headers },
+      );
       props.itemChangedHandler();
       message.success('삭제완료');
     } catch (e) {

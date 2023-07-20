@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = '/api/expenses';
+const BASE_URL = 'https://chickenlecture.xyz/api/expenses';
 
 // 일별, 주별, 월별 소비 조회
 const lookupByDate = async (period) => {
