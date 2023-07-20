@@ -21,6 +21,8 @@ const TheCalendar = () => {
   const [monthlySpending, setMonthlySpending] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [currentMode, setCurrentMode] = useState('month');
+
   // 소비 달력 조회 API 호출
   const getSpending = async () => {
     setIsLoading(true);
@@ -59,6 +61,7 @@ const TheCalendar = () => {
   // 달력의 월 또는 연도를 변경할 때마다 선택한 날짜에 맞는 소비 데이터를 업데이트하여 화면에 출력
   const handlePanelChange = async (value, mode) => {
     // value를 원하는 형식의 문자열로 변환
+    setCurrentMode(mode);
     const formattedValue = value.format('YYYY-MM-DD');
     setSelectedDateDetail(spending[formattedValue]); // 선택한 날짜에 맞는 소비 데이터 설정
     // getSpending 함수를 호출하여 선택한 날짜에 맞는 소비 데이터 가져오기
@@ -69,7 +72,6 @@ const TheCalendar = () => {
       alert('오류가 발생했습니다.', error);
     }
   };
-
   // 랜더링 시 API 호출
   useEffect(() => {
     getSpending();
@@ -166,10 +168,12 @@ const TheCalendar = () => {
             onSelect={(date) => getDetailList(date)}
             onPanelChange={handlePanelChange}
           />
-          <ItemList
-            listDetail={selectedDateDetail}
-            itemChangedHandler={itemChangedHandler}
-          />
+          {currentMode === 'month' ? (
+            <ItemList
+              listDetail={selectedDateDetail}
+              itemChangedHandler={itemChangedHandler}
+            />
+          ) : null}
         </>
       )}
     </>
