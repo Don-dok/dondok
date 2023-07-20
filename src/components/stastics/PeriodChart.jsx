@@ -5,7 +5,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import {
   barOptions_period,
   pieOptions_period,
-  bigAmountOptions
+  bigAmountOptions,
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -44,7 +44,7 @@ export default function PeriodChart() {
   const fetchPeriodSummary = async () => {
     try {
       const response = await axios.get(
-        `http://52.78.195.183:3003/api/expenses/summary?period=monthly&userId=Team2`,
+        `https://chickenlecture.xyz/api/expenses/summary?period=monthly&userId=Team2`,
       );
       const responseData = response.data;
 
@@ -123,8 +123,6 @@ export default function PeriodChart() {
     setSelectYear(parseInt(value));
   };
 
-
-
   return (
     <div className="period-chart-container">
       <div className="chart-controls">
@@ -151,13 +149,10 @@ export default function PeriodChart() {
         </Button>
       </div>
       {totalAmount && data ? (
-
         <div>
           <div>총 지출 금액: {totalAmount.toLocaleString()}원</div>
           {data ? <Bar data={data} options={barOptions_period} /> : null}
           {data ? <Pie data={data} options={pieOptions_period} /> : null}
-
-
         </div>
       ) : (
         <h1>지출 내역이 없습니다.</h1>

@@ -34,7 +34,7 @@ const ItemList = (props) => {
       };
       try {
         await axios.put(
-          `http://52.78.195.183:3003/api/expenses/${item._id}`,
+          `https://chickenlecture.xyz/api/expenses/${item._id}`,
           body,
           { headers: headers },
         );
@@ -58,7 +58,7 @@ const ItemList = (props) => {
     };
     try {
       await axios.delete(
-        `http://52.78.195.183:3003/api/expenses/${id}`,
+        `https://chickenlecture.xyz/api/expenses/${id}`,
         {},
         { headers: headers },
       );
@@ -123,7 +123,6 @@ const ItemList = (props) => {
               ]}
             >
               <List.Item.Meta
-
                 description={
                   editableIndex === index && edit ? (
                     <DatePicker
@@ -161,12 +160,12 @@ const ItemList = (props) => {
                     editableIndex === index && amount
                       ? amount
                       : Number(item.amount).toLocaleString()
-                    }
-                    addonAfter="원"
-                    disabled={!(edit && editableIndex === index)}
-                    defaultValue={`${Number(item.amount).toLocaleString()}원`}
-                    onChange={(e) => amountChangeHandler(e, index)}
-                  />
+                  }
+                  addonAfter="원"
+                  disabled={!(edit && editableIndex === index)}
+                  defaultValue={`${Number(item.amount).toLocaleString()}원`}
+                  onChange={(e) => amountChangeHandler(e, index)}
+                />
               </div>
             </List.Item>
           )}

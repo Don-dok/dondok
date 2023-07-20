@@ -5,7 +5,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import {
   barOptions_category,
   pieOptions_category,
-  bigAmountOptions
+  bigAmountOptions,
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -48,7 +48,7 @@ export default function TotalCategoryChart() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://52.78.195.183:3003/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
+        `https://chickenlecture.xyz/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
       );
 
       const responseData = response.data;
@@ -173,7 +173,7 @@ export default function TotalCategoryChart() {
           </div>
           <Bar
             data={data}
-            options={{barOptions_category,...bigAmountOptions}}
+            options={{ barOptions_category, ...bigAmountOptions }}
             style={{
               position: 'relative',
               margin: 'auto',
