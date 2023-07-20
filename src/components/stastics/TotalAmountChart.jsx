@@ -1,4 +1,4 @@
-//////////////////////////// 일 지출 내역 (X축 일자, Y축 금액) //////////////////////////////
+// 일 지출내역 컴포넌트
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pie, Line } from 'react-chartjs-2';
@@ -6,6 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   lineOptions_amount,
   pieOptions_amount,
+  bigAmountOptions
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -35,6 +36,10 @@ ChartJS.register(
   Filler,
   ArcElement,
 );
+import { Select, Button } from 'antd';
+const { Option } = Select;
+import './TotalAmountChart.css';
+import ChartWrapper from './ChartWrapper';
 
 export default function TotalAmountChart() {
   const currentDate = new Date();
@@ -72,7 +77,8 @@ export default function TotalAmountChart() {
         const year = koreanTime.getFullYear();
         const month = ('0' + (koreanTime.getMonth() + 1)).slice(-2);
         const day = ('0' + koreanTime.getDate()).slice(-2);
-        return `${year}년 ${month}월 ${day}일`;
+        return `${month}월 ${day}일`;
+        // return `${year}년 ${month}월 ${day}일`;
       };
 
       // 토탈;
@@ -107,26 +113,38 @@ export default function TotalAmountChart() {
         labels: Object.keys(categoryAmounts), // x축
         datasets: [
           {
+            fill: true, // true로 사용시 line 차트 안을 채움
             label: '지출 금액(₩)',
             data: Object.values(categoryAmounts).map((item) =>
               Object.values(item).reduce((acc, curr) => acc + curr, 0),
             ), // 날짜별 카테고리별 금액 합계 사용
             backgroundColor: [
-              'rgba(0,164,239, .3)', // 파
-              'rgba(127,186,0, .3)', // 초
-              'rgba(242,80,34, .3)', // 빨
-              'rgba(255,185,0, .3)', // 노
-              'rgba(115,115,115, .3)', // 흑
+              // 'rgba(242,80,34, .3)', // 빨
+              // 'rgba(127,186,0, .3)', // 초
+              // 'rgba(0,164,239, .3)', // 파
+              // 'rgba(255,185,0, .3)', // 노
+              // 'rgba(115,115,115, .3)', // 흑
+              'rgba(255, 154, 60, .7)', // #ff9a3c
+              'rgba(21, 82, 99, .7)', // #155263
+              'rgba(189, 195, 198, .7)', // #bdc3c6
+              'rgba(44, 54, 93, .7)', // #2c365d
+              'rgba(255, 111, 60, .7)', // #ff6f3c
+              'rgba(255, 201, 60, .7)', // #ffc93c
             ],
             borderColor: [
-              'rgba(0,164,239, .8)', // 파
-              'rgba(127,186,0, .8)', // 초
-              'rgba(242,80,34, .8)', // 빨
-              'rgba(255,185,0, .8)', // 노
-              'rgba(115,115,115, .8)', // 흑
+              // 'rgba(242,80,34, .8)', // 빨
+              // 'rgba(127,186,0, .8)', // 초
+              // 'rgba(0,164,239, .8)', // 파
+              // 'rgba(255,185,0, .8)', // 노
+              // 'rgba(115,115,115, .8)', // 흑
+              'rgba(255, 154, 60, .8)', // #ff9a3c
+              'rgba(21, 82, 99, .8)', // #155263
+              'rgba(189, 195, 198, .8)', // #bdc3c6
+              'rgba(44, 54, 93, .8)', // #2c365d
+              'rgba(255, 111, 60, .8)', // #ff6f3c
+              'rgba(255, 201, 60, .8)', // #ffc93c
             ],
             borderWidth: 3,
-            fill: true, // true로 사용시 line 차트 안을 채움
           },
         ],
       };
@@ -143,11 +161,11 @@ export default function TotalAmountChart() {
     }
   };
   // 이벤트 핸들러
-  const handleChangeYear = (e) => {
-    setYear(parseInt(e.target.value));
+  const handleChangeYear = (value) => {
+    setYear(parseInt(value));
   };
-  const handleChangeMonth = (e) => {
-    setMonth(parseInt(e.target.value));
+  const handleChangeMonth = (value) => {
+    setMonth(parseInt(value));
   };
 
   useEffect(() => {
@@ -155,49 +173,68 @@ export default function TotalAmountChart() {
   }, []);
 
   return (
-    <div>
+    <div className="total-amount-chart-container">
       {isLoading ? <Loading /> : null}
-      <span>
-        <label htmlFor="year"></label>
-        <select id="year" value={year} onChange={handleChangeYear}>
-          <option value={currentYear - 3}>{currentYear - 3}년</option>
-          <option value={currentYear - 2}>{currentYear - 2}년</option>
-          <option value={currentYear - 1}>{currentYear - 1}년</option>
-          <option value={currentYear}>{currentYear}년</option>
-          <option value={currentYear + 1}>{currentYear + 1}년</option>
-          <option value={currentYear + 2}>{currentYear + 2}년</option>
-          <option value={currentYear + 3}>{currentYear + 3}년</option>
-        </select>
-      </span>
-      <span
-        style={{
-          marginLeft: '5px',
-        }}
-      >
-        <label htmlFor="month"></label>
-        <select id="month" value={month} onChange={handleChangeMonth}>
-          <option value={1}>1월</option>
-          <option value={2}>2월</option>
-          <option value={3}>3월</option>
-          <option value={4}>4월</option>
-          <option value={5}>5월</option>
-          <option value={6}>6월</option>
-          <option value={7}>7월</option>
-          <option value={8}>8월</option>
-          <option value={9}>9월</option>
-          <option value={10}>10월</option>
-          <option value={11}>11월</option>
-          <option value={12}>12월</option>
-        </select>
-        <button onClick={fetchData}>검색</button>
-      </span>
-
+      <div className="chart-controls">
+        <label htmlFor="year"> </label>
+        <Select id="year" value={year} onChange={handleChangeYear}>
+          <Option value={currentYear - 3}>{currentYear - 3}년</Option>
+          <Option value={currentYear - 2}>{currentYear - 2}년</Option>
+          <Option value={currentYear - 1}>{currentYear - 1}년</Option>
+          <Option value={currentYear}>{currentYear}년</Option>
+          <Option value={currentYear + 1}>{currentYear + 1}년</Option>
+          <Option value={currentYear + 2}>{currentYear + 2}년</Option>
+          <Option value={currentYear + 3}>{currentYear + 3}년</Option>
+        </Select>
+        <label htmlFor="month"> </label>
+        <Select id="month" value={month} onChange={handleChangeMonth}>
+          <Option value={1} className="num1">
+            1월
+          </Option>
+          <Option value={2}>2월</Option>
+          <Option value={3}>3월</Option>
+          <Option value={4}>4월</Option>
+          <Option value={5}>5월</Option>
+          <Option value={6}>6월</Option>
+          <Option value={7}>7월</Option>
+          <Option value={8}>8월</Option>
+          <Option value={9}>9월</Option>
+          <Option value={10}>10월</Option>
+          <Option value={11}>11월</Option>
+          <Option value={12}>12월</Option>
+        </Select>
+        <Button
+          onClick={fetchData}
+          style={{ backgroundColor: '#35495e', color: 'white' }}
+        >
+          검색
+        </Button>
+      </div>
       {!isLoading && totalAmount && data ? (
-        <div>
-          <div>총 지출 금액: {totalAmount}원</div>
-          <Line data={data} options={lineOptions_amount} />
-          <hr />
-          <Pie data={data} options={pieOptions_amount} />
+        <div className="chart-wrapper">
+          <div className="total-amount">
+            총 지출 금액: {totalAmount.toLocaleString()}원
+          </div>
+          <Line
+            data={data}
+            options={{ lineOptions_amount, ...bigAmountOptions }}
+            style={{
+              position: 'relative',
+              margin: 'auto',
+              width: '420px',
+              height: '100%',
+            }}
+          />
+          <Pie
+            data={data}
+            options={pieOptions_amount}
+            style={{
+              position: 'relative',
+              margin: 'auto',
+              width: '400px',
+              height: '400px',
+            }}
+          />
         </div>
       ) : (
         !isLoading && <h1>지출 내역이 없습니다.</h1>
