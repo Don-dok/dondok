@@ -1,0 +1,2 @@
+/api/\*:
+Access-Control-Allow-Origin: https://lustrous-douhua-5caa11.netlify.app
