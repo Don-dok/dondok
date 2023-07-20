@@ -32,7 +32,7 @@ const Search = () => {
   const getList = async () => {
     try {
       const response = await fetch(
-        `http://52.78.195.183:3003/api/expenses/search?q=${value}&userId=Team2`,
+        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -61,7 +61,7 @@ const Search = () => {
   const suggestWords = async (value) => {
     try {
       const response = await fetch(
-        `http://52.78.195.183:3003/api/expenses/search?q=${value}&userId=Team2`,
+        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -103,7 +103,7 @@ const Search = () => {
       };
       try {
         await axios.put(
-          `http://52.78.195.183:3003/api/expenses/${item._id}`,
+          `https://chickenlecture.xyz/api/expenses/${item._id}`,
           body,
           { headers: headers },
         );
@@ -128,7 +128,7 @@ const Search = () => {
     };
     try {
       await axios.delete(
-        `http://52.78.195.183:3003/api/expenses/${id}`,
+        `https://chickenlecture.xyz/api/expenses/${id}`,
         {},
         { headers: headers },
       );
@@ -166,9 +166,7 @@ const Search = () => {
   };
 
   return (
-    <div
-    style={{ width: '100%',
-            marginTop: 25,}}>
+    <div style={{ width: '100%', marginTop: 25 }}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -176,11 +174,7 @@ const Search = () => {
           <AutoComplete
             value={value}
             options={options} // 제안 옵션들
-
-            style={{ width: '100%',
-                    margin: '0 auto', }}
-
-
+            style={{ width: '100%', margin: '0 auto' }}
             placeholder="검색어를 입력하세요."
             onKeyDown={(e) => pressEnterKey(e)}
             onChange={onChange}
@@ -192,7 +186,6 @@ const Search = () => {
               height: 'auto',
               marginTop: 15,
               padding: '0 20px',
-
             }}
           >
             <List
@@ -229,7 +222,6 @@ const Search = () => {
                         disabled={!(edit && editableIndex === index)}
                         defaultValue={item.category}
                         onChange={(e) => updateCategoryHandler(e, index)}
-                        
                       />
                     }
                     description={
@@ -242,7 +234,6 @@ const Search = () => {
                           format="YYYY-MM-DD HH:mm"
                           showTime
                           onChange={(date) => dateChangeHandler(date)}
-                          
                         />
                       ) : item.date ? (
                         <DateTimeDisplay dateTime={item.date} />

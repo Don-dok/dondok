@@ -6,7 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   lineOptions_amount,
   pieOptions_amount,
-  bigAmountOptions
+  bigAmountOptions,
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -56,7 +56,7 @@ export default function TotalAmountChart() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://52.78.195.183:3003/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
+        `https://chickenlecture.xyz/api/expenses/calendar?year=${year}&month=${month}&userId=Team2&includeCategory=true`,
       );
 
       const responseData = response.data;
