@@ -166,7 +166,9 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <div
+    style={{ width: '100%',
+            marginTop: 25,}}>
       {isLoading ? (
         <Loading />
       ) : (
@@ -174,7 +176,12 @@ const Search = () => {
           <AutoComplete
             value={value}
             options={options} // 제안 옵션들
-            style={{ width: 200 }}
+
+            style={{ width: '100%',
+                    margin: '0 auto', }}
+            onSelect={onSelect} // 제안 옵션 선택 시 호출되는 핸들러
+            onSearch={onChange} // 입력 값 변경 시 호출되는 핸들러
+
             placeholder="검색어를 입력하세요."
             onKeyDown={(e) => pressEnterKey(e)}
             onChange={onChange}
@@ -183,10 +190,10 @@ const Search = () => {
           <div
             id="scrollableDiv"
             style={{
-              height: 400,
-              overflow: 'auto',
-              padding: '0 16px',
-              border: '1px solid rgba(140, 140, 140, 0.35)',
+              height: 'auto',
+              marginTop: 15,
+              padding: '0 20px',
+
             }}
           >
             <List
@@ -223,6 +230,7 @@ const Search = () => {
                         disabled={!(edit && editableIndex === index)}
                         defaultValue={item.category}
                         onChange={(e) => updateCategoryHandler(e, index)}
+                        
                       />
                     }
                     description={
@@ -235,6 +243,7 @@ const Search = () => {
                           format="YYYY-MM-DD HH:mm"
                           showTime
                           onChange={(date) => dateChangeHandler(date)}
+                          
                         />
                       ) : item.date ? (
                         <DateTimeDisplay dateTime={item.date} />
@@ -254,6 +263,7 @@ const Search = () => {
                       disabled={!(edit && editableIndex === index)}
                       defaultValue={Number(item.amount).toLocaleString()}
                       onChange={(e) => amountChangeHandler(e, index)}
+                      addonAfter="원"
                     />
                   </div>
                 </List.Item>

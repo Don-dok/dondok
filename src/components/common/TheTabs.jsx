@@ -74,6 +74,10 @@ const StyledTabs = styled(Tabs)`
     justify-content: space-evenly;
     width: 100%;
   }
+
+  .ant-tabs-nav{
+    margin:0;
+  }
   .ant-tabs-tab {
     // width: 50%;
     justify-content: center;

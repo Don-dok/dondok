@@ -60,10 +60,10 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
           key: i,
           label: (
             <Container>
-              <p style={{ fontWeight: 700 }}>
-                {moment(value.date).format('YYYY년 MM월 DD일')}
-              </p>
-              <p style={{ color: '#EF6262' }}>₩ {formatPrice(value.sum)}</p>
+
+              <p style={{ fontWeight: 600 , display: 'flex', alignItems: 'center' , fontSize: 17 }}>{value.date}</p>
+              <p style={{ color: '#EF6262', fontSize: 16 ,fontWeight: 600 }}>₩ {formatPrice(value.sum)}</p>
+
             </Container>
           ),
           // 상세 내역
@@ -72,8 +72,12 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
             .map((value, i) => (
               <Details_Box key={i}>
                 <li>
-                  <Tag color="#468B97">{value.category}</Tag>
-                  <p>₩{formatPrice(value.amount)}</p>
+                  <Tag color="#77bcf0e8" style={{
+                    fontSize: 17,
+                    display: 'flex',
+                    alignItems: 'center'}}
+                    >{value.category}</Tag>
+                  <p style={{ fontSize: 17 }}>₩{formatPrice(value.amount)}</p>
                 </li>
               </Details_Box>
             )),
@@ -105,7 +109,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
             <StyledCard
               key={i}
               style={{
-                width: 250,
+                width: 390,
               }}
             >
               <strong>{getStartDateAndEndDate(date[0], date[1])}</strong>
@@ -123,7 +127,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
             <StyledCard
               key={i}
               style={{
-                width: 300,
+                width: 390,
               }}
             >
               <strong>{moment(value._id).format('YYYY년 MM월')}</strong>
@@ -156,7 +160,7 @@ export default Details;
 const Container = styled.div`
   color: #202e3d;
   display: flex;
-  gap: 70px;
+  justify-content: space-between;
   p {
     margin: 0;
   }
@@ -181,12 +185,19 @@ const StyledCollapse = styled(Collapse)`
 const StyledCard = styled(Card)`
   color: #202e3d;
   margin-top: 10px;
+  font-size: 14.3px;
+
   .ant-card-body {
     padding: 10px 20px;
-  }
+    }
 
   .amount {
     float: right;
     color: #ef6262;
+    font-size: 15px;
+    font-weight: 600;
   }
+
+  &:last-child {
+    margin-bottom: 10px;
 `;

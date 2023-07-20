@@ -13,8 +13,10 @@ const CreateModal = (props) => {
   );
 
   const modalStyle = {
-    borderRadius: '10px',
-    width: '300px',
+
+    borderRadius: '10px', 
+    padding: 0,
+
   };
 
   // Modal
@@ -72,21 +74,16 @@ const CreateModal = (props) => {
 
   return (
     <>
-      <div style={{ position: 'relative' }}>
-        <Button
-          onClick={showModal}
-          style={{
-            position: 'fixed',
-            bottom: 130,
-            right: 0,
-            backgroundColor: '#79edff',
-            borderRadius: 80,
-            width: 50,
-            height: 50,
-            fontSize: 25,
-            paddingBottom: 35,
-          }}
-        >
+
+      <div style={{ position: 'relative',
+                      width:400,
+                      margin:'0 auto',
+                      height:'auto', }}>
+          <Button
+            onClick={showModal}
+            style={{ position: 'absolute', bottom: 10, right: 0,backgroundColor: '#79edff', borderRadius: 80, width: 50, height:50 ,fontSize: 25, paddingBottom:35,}}
+          >
+
           +
         </Button>
       </div>

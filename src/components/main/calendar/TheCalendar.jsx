@@ -120,11 +120,12 @@ const TheCalendar = () => {
         return (
           <p
             style={{
-              fontSize: 8,
+              fontSize: 10,
               marginTop: 16,
               color: '#fc037b',
               wordBreak: 'break-all', // 너비보다 글자가 긴 경우, 줄바꿈
               lineHeight: 1,
+              textAlign: 'center',
             }}
           >
             ₩ {formatPrice(listData[i].sum)}

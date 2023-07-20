@@ -30,6 +30,8 @@ const Header = styled.section`
   gap: 5px;
   z-index: 1000;
   width: 100%;
-  background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  background-color: rgba(200, 244, 255, .5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); 
+
 `;

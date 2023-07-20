@@ -123,8 +123,7 @@ export default function PeriodChart() {
     setSelectYear(parseInt(value));
   };
 
-  // y축 금액 커질시 가독성 문제 해결
-  
+
 
   return (
     <div className="period-chart-container">
@@ -152,34 +151,13 @@ export default function PeriodChart() {
         </Button>
       </div>
       {totalAmount && data ? (
-        <div className="chart-wrapper">
-          <div className="total-amount">
-            총 지출 금액: {totalAmount.toLocaleString()}원
-          </div>
-          {data ? (
-            <Bar
-              data={data}
-              options={{barOptions_period,...bigAmountOptions}}
-              style={{
-                position: 'relative',
-                margin: 'auto',
-                width: '420px',
-                height: '100%',
-              }}
-            />
-          ) : null}
-          {data ? (
-            <Pie
-              data={data}
-              options={pieOptions_period}
-              style={{
-                position: 'relative',
-                margin: 'auto',
-                width: '400px',
-                height: '400px',
-              }}
-            />
-          ) : null}
+
+        <div>
+          <div>총 지출 금액: {totalAmount.toLocaleString()}원</div>
+          {data ? <Bar data={data} options={barOptions_period} /> : null}
+          {data ? <Pie data={data} options={pieOptions_period} /> : null}
+
+
         </div>
       ) : (
         <h1>지출 내역이 없습니다.</h1>
