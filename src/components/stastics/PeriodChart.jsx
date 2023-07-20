@@ -44,7 +44,7 @@ export default function PeriodChart() {
   const fetchPeriodSummary = async () => {
     try {
       const response = await axios.get(
-        `https://chickenlecture.xyz/api/expenses/summary?period=monthly&userId=Team2`,
+        `/api/expenses/summary?period=monthly&userId=Team2`,
       );
       const responseData = response.data;
 

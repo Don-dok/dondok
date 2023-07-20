@@ -33,11 +33,9 @@ const ItemList = (props) => {
         date: dateTime,
       };
       try {
-        await axios.put(
-          `https://chickenlecture.xyz/api/expenses/${item._id}`,
-          body,
-          { headers: headers },
-        );
+        await axios.put(`/api/expenses/${item._id}`, body, {
+          headers: headers,
+        });
         props.itemChangedHandler();
       } catch (e) {
         alert('오류가 발생했습니다.', e);
@@ -57,11 +55,7 @@ const ItemList = (props) => {
       'Content-Type': 'application/json',
     };
     try {
-      await axios.delete(
-        `https://chickenlecture.xyz/api/expenses/${id}`,
-        {},
-        { headers: headers },
-      );
+      await axios.delete(`/api/expenses/${id}`, {}, { headers: headers });
       props.itemChangedHandler();
       message.success('삭제완료');
     } catch (e) {

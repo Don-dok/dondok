@@ -32,7 +32,7 @@ const Search = () => {
   const getList = async () => {
     try {
       const response = await fetch(
-        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
+        `/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -61,7 +61,7 @@ const Search = () => {
   const suggestWords = async (value) => {
     try {
       const response = await fetch(
-        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
+        `/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -102,11 +102,9 @@ const Search = () => {
         date: dateTime,
       };
       try {
-        await axios.put(
-          `https://chickenlecture.xyz/api/expenses/${item._id}`,
-          body,
-          { headers: headers },
-        );
+        await axios.put(`/api/expenses/${item._id}`, body, {
+          headers: headers,
+        });
       } catch (e) {
         console.log(e);
       }
@@ -127,11 +125,7 @@ const Search = () => {
       'Content-Type': 'application/json',
     };
     try {
-      await axios.delete(
-        `https://chickenlecture.xyz/api/expenses/${id}`,
-        {},
-        { headers: headers },
-      );
+      await axios.delete(`/api/expenses/${id}`, {}, { headers: headers });
       message.success('삭제완료');
     } catch (e) {
       console.log(e);
