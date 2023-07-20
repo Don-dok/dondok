@@ -6,6 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   lineOptions_amount,
   pieOptions_amount,
+  bigAmountOptions
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -216,7 +217,7 @@ export default function TotalAmountChart() {
           </div>
           <Line
             data={data}
-            options={lineOptions_amount}
+            options={{ lineOptions_amount, ...bigAmountOptions }}
             style={{
               position: 'relative',
               margin: 'auto',

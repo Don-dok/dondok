@@ -5,6 +5,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import {
   barOptions_category,
   pieOptions_category,
+  bigAmountOptions
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -172,7 +173,7 @@ export default function TotalCategoryChart() {
           </div>
           <Bar
             data={data}
-            options={barOptions_category}
+            options={{barOptions_category,...bigAmountOptions}}
             style={{
               position: 'relative',
               margin: 'auto',

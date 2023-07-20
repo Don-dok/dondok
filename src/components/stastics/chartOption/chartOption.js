@@ -1,7 +1,7 @@
 // 일 지출 내역별
 export const lineOptions_amount = {
   responsive: true,
-  tension: .4, // Line 곡선 설정
+  tension: 0.4, // Line 곡선 설정
   radius: 2.5, // point 크기
   plugins: {
     legend: {
@@ -45,7 +45,6 @@ export const pieOptions_amount = {
     },
   },
 };
-
 
 // 카테고리 별
 export const barOptions_category = {
@@ -135,6 +134,30 @@ export const pieOptions_period = {
     tooltip: {
       mode: 'index', // 상세 정보를 표시할 때 인덱스 모드로 설정
       intersect: false, // 충돌하지 않도록 설정
+    },
+  },
+};
+
+// y축(금액) 커질시 가독성 해결 함수
+export const bigAmountOptions = {
+  scales: {
+    y: {
+      ticks: {
+        callback: function (value) {
+          if (value >= 100000000) {
+            // 1억 이상일 경우 'x.x억' 형식으로 표기 후 floor로 소수점 버림
+            const abbreviated = Math.floor((value / 100000000).toFixed(1)).toLocaleString() + '억원'; 
+            return abbreviated;
+          }
+          // 1만 이상일 경우 'x.x만' 형식으로 표기 후 floor로 소수점 버림
+          if (value >= 10000) {
+            const abbreviated = Math.floor((value / 10000).toFixed(1)).toLocaleString() + '만 (원)' ; 
+            return abbreviated;
+          }
+          // 1만 미만은 일반적인 형식으로 표기
+          return value.toLocaleString() + ' (원)'; 
+        },
+      },
     },
   },
 };

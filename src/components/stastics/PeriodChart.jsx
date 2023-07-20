@@ -5,6 +5,7 @@ import { Bar, Pie } from 'react-chartjs-2';
 import {
   barOptions_period,
   pieOptions_period,
+  bigAmountOptions
 } from './chartOption/chartOption';
 import {
   Chart as ChartJS,
@@ -122,6 +123,9 @@ export default function PeriodChart() {
     setSelectYear(parseInt(value));
   };
 
+  // y축 금액 커질시 가독성 문제 해결
+  
+
   return (
     <div className="period-chart-container">
       <div className="chart-controls">
@@ -155,7 +159,7 @@ export default function PeriodChart() {
           {data ? (
             <Bar
               data={data}
-              options={barOptions_period}
+              options={{barOptions_period,...bigAmountOptions}}
               style={{
                 position: 'relative',
                 margin: 'auto',
