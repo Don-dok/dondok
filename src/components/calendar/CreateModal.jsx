@@ -59,6 +59,7 @@ const CreateModal = (props) => {
     setAmount('');
   };
   const dateChangeHandler = (date) => {
+    console.log('date: ', date);
     setDateTime(date.add(9, 'hour').toISOString());
   };
   const categoryChangeHandler = (e) => {
@@ -102,6 +103,7 @@ const CreateModal = (props) => {
           format="YYYY-MM-DD HH:mm"
           showTime
           onChange={(date) => dateChangeHandler(date)}
+          allowClear={false}
         />
         <Input
           value={category || null}
