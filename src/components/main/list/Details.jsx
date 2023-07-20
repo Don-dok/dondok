@@ -60,8 +60,10 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
           key: i,
           label: (
             <Container>
+
               <p style={{ fontWeight: 600 , display: 'flex', alignItems: 'center' , fontSize: 17 }}>{value.date}</p>
               <p style={{ color: '#EF6262', fontSize: 16 ,fontWeight: 600 }}>₩ {formatPrice(value.sum)}</p>
+
             </Container>
           ),
           // 상세 내역

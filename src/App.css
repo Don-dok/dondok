@@ -1,8 +1,11 @@
+
 body{
+
   margin: 0;
 }
-
-
+div {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 :root {
   --calendar-date-content-height: 58px;
 }
@@ -37,6 +40,7 @@ body{
 .ant-menu-light > .ant-menu.ant-menu-root.ant-menu-vertical {
   border: none;
 }
+
 
 .ant-list-item-meta-content{
   flex-direction: column-reverse;
@@ -211,6 +215,7 @@ body{
 
 .ant-modal-root .ant-modal-mask{
   height: auto;
+
 }
 
 .App {
@@ -221,11 +226,11 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
   margin-top: 10px;
+
   border-radius: 10px;
+
 }
 
 .App::-webkit-scrollbar {
   overflow: hidden;
 }
-
-

@@ -12,11 +12,11 @@ const CreateModal = (props) => {
     moment().add(9, 'hours').toISOString(),
   );
 
-
   const modalStyle = {
+
     borderRadius: '10px', 
     padding: 0,
-    backgroundColor: 'red',
+
   };
 
   // Modal
@@ -50,7 +50,7 @@ const CreateModal = (props) => {
         alert('등록실패');
       }
     } catch (e) {
-      alert('오류가 발생했습니다.', e)
+      alert('오류가 발생했습니다.', e);
     }
   };
   const handleCancel = () => {
@@ -67,13 +67,14 @@ const CreateModal = (props) => {
 
   const amountChangeHandler = (e) => {
     const { value } = e.target;
-    const number = value.replace(/,/g, '');
+    const number = value.replace(/[^0-9]/g, '');
     const formattedNumber = Number(number).toLocaleString();
     setAmount(formattedNumber);
   };
 
   return (
     <>
+
       <div style={{ position: 'relative',
                       width:400,
                       margin:'0 auto',
@@ -82,6 +83,7 @@ const CreateModal = (props) => {
             onClick={showModal}
             style={{ position: 'absolute', bottom: 10, right: 0,backgroundColor: '#79edff', borderRadius: 80, width: 50, height:50 ,fontSize: 25, paddingBottom:35,}}
           >
+
           +
         </Button>
       </div>
