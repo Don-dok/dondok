@@ -33,11 +33,11 @@ const items = [
 
 
 const StyledMenu = styled(Menu)`
-
+  width: 400px;
   height: 350px;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 
@@ -75,8 +75,7 @@ export default User;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
 
 
 

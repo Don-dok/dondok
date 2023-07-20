@@ -40,6 +40,7 @@ const Container = styled.section`
 
   box-sizing: border-box;
   margin: 50px 0;
+  width:100%;
   height: 88%;
   display: flex;
   flex-direction: column;

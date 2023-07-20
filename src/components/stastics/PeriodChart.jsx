@@ -108,6 +108,9 @@ export default function PeriodChart() {
     setSelectYear(parseInt(e.target.value));
   };
 
+
+
+
   return (
     <div>
       <label htmlFor="year">연도 선택</label>
@@ -123,7 +126,7 @@ export default function PeriodChart() {
       <button onClick={fetchPeriodSummary}>검색</button>
       {totalAmount && data ? (
         <div>
-          <div>총 지출 금액: {totalAmount}원</div>
+          <div>총 지출 금액: {totalAmount.toLocaleString()}원</div>
           {data ? <Bar data={data} options={barOptions_period} /> : null}
           {data ? <Pie data={data} options={pieOptions_period} /> : null}
         </div>

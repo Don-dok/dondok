@@ -78,7 +78,7 @@ const ItemList = (props) => {
 
   const amountChangeHandler = (e, index) => {
     const { value } = e.target;
-    const number = value.replace(/,/g, '');
+    const number = value.replace(/[^0-9]/g, '');
     setAmount(Number(number));
     const newList = [...list];
     newList[index].amount = Number(number);
@@ -94,12 +94,9 @@ const ItemList = (props) => {
         id="scrollableDiv"
         style={{
           height: 190,
-          width: 390,
-    
-          padding: '0 0 0 25px',
+          width: 400,
+          padding: '0 0 0 0px',
           borderTop: '1px solid rgba(140, 140, 140, 0.35)',
-
-          
         }}
       >
         <List
@@ -126,18 +123,7 @@ const ItemList = (props) => {
               ]}
             >
               <List.Item.Meta
-                title={
-                  <Input
-                    value={
-                      editableIndex === index && category
-                        ? category
-                        : item.category
-                    }
-                    disabled={!(edit && editableIndex === index)}
-                    defaultValue={item.category}
-                    onChange={(e) => updateCategoryHandler(e, index)}
-                  />
-                }
+
                 description={
                   editableIndex === index && edit ? (
                     <DatePicker
@@ -155,6 +141,18 @@ const ItemList = (props) => {
                     ''
                   )
                 }
+                title={
+                  <Input
+                    value={
+                      editableIndex === index && category
+                        ? category
+                        : item.category
+                    }
+                    disabled={!(edit && editableIndex === index)}
+                    defaultValue={item.category}
+                    onChange={(e) => updateCategoryHandler(e, index)}
+                  />
+                }
               />
 
               <div>
@@ -163,11 +161,12 @@ const ItemList = (props) => {
                     editableIndex === index && amount
                       ? amount
                       : Number(item.amount).toLocaleString()
-                  }
-                  disabled={!(edit && editableIndex === index)}
-                  defaultValue={Number(item.amount).toLocaleString()}
-                  onChange={(e) => amountChangeHandler(e, index)}
-                />
+                    }
+                    addonAfter="원"
+                    disabled={!(edit && editableIndex === index)}
+                    defaultValue={`${Number(item.amount).toLocaleString()}원`}
+                    onChange={(e) => amountChangeHandler(e, index)}
+                  />
               </div>
             </List.Item>
           )}
