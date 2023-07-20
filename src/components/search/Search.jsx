@@ -179,8 +179,7 @@ const Search = () => {
 
             style={{ width: '100%',
                     margin: '0 auto', }}
-            onSelect={onSelect} // 제안 옵션 선택 시 호출되는 핸들러
-            onSearch={onChange} // 입력 값 변경 시 호출되는 핸들러
+
 
             placeholder="검색어를 입력하세요."
             onKeyDown={(e) => pressEnterKey(e)}
