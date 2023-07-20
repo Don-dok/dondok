@@ -7,6 +7,7 @@ const Loading = () => {
   return (
     <Container>
       <StyledSpin
+        delay={500}
         indicator={
           <DollarTwoTone style={{ fontSize: 30 }} twoToneColor="#e57e25" spin />
         }
