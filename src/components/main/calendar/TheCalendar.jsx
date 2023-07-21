@@ -3,7 +3,7 @@ import { Calendar } from 'antd';
 import styled from 'styled-components';
 import { lookupByDate, getSpendingCalendar } from '../../../api/requests';
 import { formatPrice, formatDate } from '../../../utils/format';
-import ItemList from '../../calendar/ItemList';
+import ItemList from './ItemList';
 import Loading from '../../common/Loading';
 import dayjs from 'dayjs';
 
