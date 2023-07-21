@@ -10,7 +10,7 @@ import {
 import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import DateTimeDisplay from '../calendar/DateTimeDisplay';
+import DateTimeDisplay from '../main/calendar/DateTimeDisplay';
 import Loading from '../common/Loading';
 
 const Search = () => {
@@ -174,18 +174,17 @@ const Search = () => {
         <Loading />
       ) : (
         <>
-        <div>
-        <AutoComplete
-            value={value}
-            options={options} // 제안 옵션들
-            style={{ width: '80%',
-                    margin: '0 auto', }}
-            placeholder="검색어를 입력하세요."
-            onKeyDown={(e) => pressEnterKey(e)}
-            onChange={onChange}
-          />
-          <Button onClick={getList}>검색</Button>
-        </div>
+          <div>
+            <AutoComplete
+              value={value}
+              options={options} // 제안 옵션들
+              style={{ width: '80%', margin: '0 auto' }}
+              placeholder="검색어를 입력하세요."
+              onKeyDown={(e) => pressEnterKey(e)}
+              onChange={onChange}
+            />
+            <Button onClick={getList}>검색</Button>
+          </div>
           <div
             id="scrollableDiv"
             style={{

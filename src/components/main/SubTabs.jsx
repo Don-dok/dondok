@@ -9,7 +9,7 @@ const SubTabs = () => {
   return (
     <StyledTabs
       defaultActiveKey="1"
-      style={{  }}
+      style={{}}
       items={[
         {
           label: (
