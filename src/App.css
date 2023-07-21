@@ -239,7 +239,9 @@ div {
     0 16px 16px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   background-color: white;
-  z-index: 10;
+  z-index: 99;
+  scroll-behavior: smooth;
+
 
 }
 
@@ -265,14 +267,15 @@ html {
 .dog{
   position: fixed;
   z-index: 969;
-  bottom: 5%;
-  left: 20%;
-  
+  bottom: calc(5%);
+  left: calc(20%);
+  z-index: 9;
 }
 
 .dog img{
   width: 200px;
   height: 200px;
+
 }
 
 .ocean {
