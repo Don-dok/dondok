@@ -87,7 +87,7 @@ const CreateModal = (props) => {
             width: 50, 
             height:50 ,
             fontSize: 25, 
-            paddingTop:0,}}
+            paddingTop:0}}
           >
           +
         </Button>
