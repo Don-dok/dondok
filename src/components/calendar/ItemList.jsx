@@ -33,9 +33,13 @@ const ItemList = (props) => {
         date: dateTime,
       };
       try {
-        await axios.put(`/api/expenses/${item._id}`, body, {
-          headers: headers,
-        });
+        await axios.put(
+          `https://chickenlecture.xyz/api/expenses/${item._id}`,
+          body,
+          {
+            headers: headers,
+          },
+        );
         props.itemChangedHandler();
       } catch (e) {
         alert('오류가 발생했습니다.', e);

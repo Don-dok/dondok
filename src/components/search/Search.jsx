@@ -28,11 +28,10 @@ const Search = () => {
     value: category,
     key: `category-${index}`,
   }));
-
   const getList = async () => {
     try {
       const response = await fetch(
-        `/api/expenses/search?q=${value}&userId=Team2`,
+        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -61,7 +60,7 @@ const Search = () => {
   const suggestWords = async (value) => {
     try {
       const response = await fetch(
-        `/api/expenses/search?q=${value}&userId=Team2`,
+        `https://chickenlecture.xyz/api/expenses/search?q=${value}&userId=Team2`,
         {
           method: 'GET',
         },
@@ -102,12 +101,17 @@ const Search = () => {
         date: dateTime,
       };
       try {
-        await axios.put(`/api/expenses/${item._id}`, body, {
-          headers: headers,
-        });
+        await axios.put(
+          `https://chickenlecture.xyz/api/expenses/${item._id}`,
+          body,
+          {
+            headers: headers,
+          },
+        );
       } catch (e) {
         console.log(e);
       }
+      getList();
       setEditableIndex(null);
     } else {
       setEditableIndex(index);
@@ -131,6 +135,7 @@ const Search = () => {
         { headers: headers },
       );
       message.success('삭제완료');
+      getList();
     } catch (e) {
       console.log(e);
     } finally {
