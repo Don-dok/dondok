@@ -169,15 +169,18 @@ const Search = () => {
         <Loading />
       ) : (
         <>
-          <AutoComplete
+        <div>
+        <AutoComplete
             value={value}
             options={options} // 제안 옵션들
-            style={{ width: '100%', margin: '0 auto' }}
+            style={{ width: '80%',
+                    margin: '0 auto', }}
             placeholder="검색어를 입력하세요."
             onKeyDown={(e) => pressEnterKey(e)}
             onChange={onChange}
           />
           <Button onClick={getList}>검색</Button>
+        </div>
           <div
             id="scrollableDiv"
             style={{
