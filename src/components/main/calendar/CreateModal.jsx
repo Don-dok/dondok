@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Button, Modal, Input, DatePicker } from 'antd';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -74,28 +74,22 @@ const CreateModal = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          position: 'relative',
-          width: 400,
-          margin: '0 auto',
-          height: 'auto',
-        }}
-      >
-        <Button
-          onClick={showModal}
-          style={{
-            position: 'fixed',
-            bottom: '8%',
-            right: '40%',
-            backgroundColor: 'rgb(200, 244, 255)',
-            borderRadius: 80,
-            width: 50,
-            height: 50,
-            fontSize: 25,
-            paddingTop: 0,
-          }}
-        >
+      <div style={{ position: 'relative',
+                      width:'100%',
+                      margin:'0 auto',
+                      height:'auto', }}>
+          <Button
+            onClick={showModal}
+            style={{ position: 'fixed', 
+            bottom: 'calc(9%)', 
+            right: 'calc(50% - 180px)',
+            backgroundColor: 'rgb(200, 244, 255)', 
+            borderRadius: 80, 
+            width: 50, 
+            height:50 ,
+            fontSize: 25, 
+            paddingTop:0,}}
+          >
           +
         </Button>
       </div>
