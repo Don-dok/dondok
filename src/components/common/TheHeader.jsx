@@ -13,7 +13,7 @@ const TheHeader = () => {
           fontSize: 20,
         }}
       >
-        DonDog
+        DonDok
       </div>
     </Header>
   );
