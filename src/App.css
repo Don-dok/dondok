@@ -4,14 +4,16 @@ html {
 }
 
 body{
-
   margin: 0;
 }
+
 div {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-
+#root {
+  height: 100%;
+}
 
 :root {
   --calendar-date-content-height: 58px;
@@ -209,16 +211,17 @@ div {
 
 .ant-modal-mask {
   margin: 0 auto;
-  width: 436px;
+  width: 438px;
   height: 100vh;
   border-radius: 5px;
   margin-top: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
   overflow: hidden;
 }
 
 .ant-modal-root .ant-modal-mask {
   height: auto;
+
 }
 
 .App {
@@ -228,17 +231,16 @@ div {
   height: 98vh;
   border: 1px solid rgba(0, 0, 0, 0.2);
   overflow: hidden;
-
+  margin-top: 10px;
   box-shadow:
     0 1px 1px rgba(0, 0, 0, 0.12),
     0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.12),
     0 8px 8px rgba(0, 0, 0, 0.12),
     0 16px 16px rgba(0, 0, 0, 0.12);
-  margin-top: 10px;
   border-radius: 10px;
   background-color: white;
-  z-index: 9999999;
+  z-index: 10;
 
 }
 
@@ -251,14 +253,19 @@ div {
 /* 배경 이미지  */
 
 body {
-  background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #B7E8EB 100%);
+
   overflow: hidden;
+}
+
+html {
+  background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #B7E8EB 100%);
+
 }
 
 
 .dog{
   position: fixed;
-  z-index: 969999999;
+  z-index: 969;
   bottom: 5%;
   left: 20%;
 }
