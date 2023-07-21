@@ -12,6 +12,8 @@ const CreateModal = (props) => {
     moment().add(9, 'hours').toISOString(),
   );
 
+  console.log(category);
+
   const modalStyle = {
     borderRadius: '10px',
     padding: 0,
@@ -57,7 +59,6 @@ const CreateModal = (props) => {
     setAmount('');
   };
   const dateChangeHandler = (date) => {
-    console.log('date: ', date);
     setDateTime(date.add(9, 'hour').toISOString());
   };
   const categoryChangeHandler = (e) => {
@@ -73,22 +74,28 @@ const CreateModal = (props) => {
 
   return (
     <>
-      <div style={{ position: 'relative',
-                      width:400,
-                      margin:'0 auto',
-                      height:'auto', }}>
-          <Button
-            onClick={showModal}
-            style={{ position: 'fixed', 
-            bottom: '8%', 
+      <div
+        style={{
+          position: 'relative',
+          width: 400,
+          margin: '0 auto',
+          height: 'auto',
+        }}
+      >
+        <Button
+          onClick={showModal}
+          style={{
+            position: 'fixed',
+            bottom: '8%',
             right: '40%',
-            backgroundColor: 'rgb(200, 244, 255)', 
-            borderRadius: 80, 
-            width: 50, 
-            height:50 ,
-            fontSize: 25, 
-            paddingTop:0,}}
-          >
+            backgroundColor: 'rgb(200, 244, 255)',
+            borderRadius: 80,
+            width: 50,
+            height: 50,
+            fontSize: 25,
+            paddingTop: 0,
+          }}
+        >
           +
         </Button>
       </div>
@@ -100,6 +107,7 @@ const CreateModal = (props) => {
         okText="등록하기"
         cancelText="취소"
         style={modalStyle}
+        okButtonProps={{ disabled: amount ? false : true }}
       >
         <DatePicker
           placeholder={moment().format('YYYY-MM-DD HH:mm')}
