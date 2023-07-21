@@ -6,7 +6,7 @@
 
 ## 프로젝트 소개
 
-> **패스트캠퍼스 프론트엔드 개발 부트캠프 5기**<br /> **개발 기간** : 2023. 07. 05 (수) ~ 2023. 07. 23 (일)<br /> **배포 주소** : ['Don-Dok' 소비 기록 앱](https://coruscating-medovik-d52dbe.netlify.app/)
+> **패스트캠퍼스 프론트엔드 개발 부트캠프 5기**<br /> **개발 기간** : 2023. 07. 05 (수) ~ 2023. 07. 23 (일)<br /> **배포 주소** : ['Don-Dok' 소비 기록 앱]([https://coruscating-medovik-d52dbe.netlify.app/](https://fanciful-khapse-3f9e31.netlify.app/))
 
 <br />
 
@@ -60,3 +60,6 @@
 <br />
 
 ## 주요 기능 및 시연
+
+<br />
+
