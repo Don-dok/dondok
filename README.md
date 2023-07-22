@@ -7,7 +7,7 @@
 
 <br />
 
-> **개발 기간** : 2023. 07. 05 (수) ~ 2023. 07. 23 (일)<br /> **배포 주소** : ['Don-Dok' 소비 기록 앱](https://spiffy-eclair-5da7a8.netlify.app/)
+> **개발 기간** : 2023. 07. 05 (수) ~ 2023. 07. 21 (금)<br /> **배포 주소** : ['Don-Dok' 소비 기록 앱](https://spiffy-eclair-5da7a8.netlify.app/)
 
 <br />
 
