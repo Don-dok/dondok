@@ -84,7 +84,7 @@ const CreateModal = (props) => {
             style={{ position: 'fixed', 
             bottom: 'calc(9%)', 
             right: 'calc(50% - 180px)',
-            
+            backgroundColor: 'rgb(200, 244, 255)', 
             borderRadius: 80, 
             width: 50, 
             height:50 ,
