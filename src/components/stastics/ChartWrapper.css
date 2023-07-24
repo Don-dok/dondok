@@ -1,10 +1,22 @@
+.total-amount-chart-container{
+  width: 100%;
+}
+
+.total-amount-chart-container .chart-wrapper{
+  width: 100%;
+}
+
+
 .chart-wrapper {
+  width: 100%;
+  margin: auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
 }
+
 
 :where(.css-dev-only-do-not-override-14wwjjs).ant-select-single:not(
     .ant-select-customize-input

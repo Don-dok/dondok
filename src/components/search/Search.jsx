@@ -183,7 +183,9 @@ const Search = () => {
               onKeyDown={(e) => pressEnterKey(e)}
               onChange={onChange}
             />
-            <Button onClick={getList}>검색</Button>
+            <Button onClick={getList}
+            style={{ width: '20%' }}
+            >검색</Button>
           </div>
           <div
             id="scrollableDiv"

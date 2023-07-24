@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, Input, DatePicker } from 'antd';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+
 
 const CreateModal = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,7 +84,7 @@ const CreateModal = (props) => {
             style={{ position: 'fixed', 
             bottom: 'calc(9%)', 
             right: 'calc(50% - 180px)',
-            backgroundColor: 'rgb(200, 244, 255)', 
+            
             borderRadius: 80, 
             width: 50, 
             height:50 ,

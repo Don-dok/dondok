@@ -38,12 +38,14 @@ const User = () => {
     <Container>
       <Card
         hoverable
-        style={{ width: 400 }}
+        style={{ width: '100%',
+                 }}
         onClick={() => window.open('https://github.com/Don-dok/dondok')}
         cover={
           <img
             alt="example"
             src="https://media.licdn.com/dms/image/C4E12AQEJl4mGgbLMZw/article-cover_image-shrink_720_1280/0/1579179450792?e=2147483647&v=beta&t=m5RD2BrgrDar7sl1vgh98tL5nVIyt3eBaKQrLm9c1Lw"
+            style={{ maxWidth: '570px' }}
           />
         }
       >
@@ -71,6 +73,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  margin-left: 18px;
+  margin-right: 18px;
 `;
 const StyledMeta = styled(Meta)`
   display: flex;

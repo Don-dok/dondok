@@ -30,3 +30,8 @@
   font-size: 18px;
   text-align: center;
 }
+
+.total-amount canvas {
+  min-width: 397px;
+  max-width: 600px;
+}

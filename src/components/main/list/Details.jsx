@@ -109,7 +109,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
             <StyledCard
               key={i}
               style={{
-                width: 390,
+                width: '100%',
               }}
             >
               <strong>{getStartDateAndEndDate(date[0], date[1])}</strong>
@@ -127,7 +127,7 @@ const Details = ({ dateData, isDaily, isWeekly }) => {
             <StyledCard
               key={i}
               style={{
-                width: 390,
+                width: '100%',
               }}
             >
               <strong>{moment(value._id).format('YYYY년 MM월')}</strong>
@@ -180,6 +180,7 @@ const Details_Box = styled.ul`
 `;
 const StyledCollapse = styled(Collapse)`
   margin: 10px;
+  width: 100%;
 `;
 
 const StyledCard = styled(Card)`
@@ -200,4 +201,5 @@ const StyledCard = styled(Card)`
 
   &:last-child {
     margin-bottom: 10px;
+
 `;

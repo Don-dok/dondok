@@ -220,9 +220,9 @@ export default function TotalAmountChart() {
             options={{ lineOptions_amount, ...bigAmountOptions }}
             style={{
               position: 'relative',
-              margin: 'auto',
               width: '420px',
               height: '100%',
+              maxWidth: '600px',
             }}
           />
           <Pie
@@ -230,9 +230,9 @@ export default function TotalAmountChart() {
             options={pieOptions_amount}
             style={{
               position: 'relative',
-              margin: 'auto',
               width: '400px',
               height: '400px',
+              maxWidth: '600px',
             }}
           />
         </div>
