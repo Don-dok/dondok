@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TheTabs from './components/common/TheTabs';
 import TheHeader from './components/common/TheHeader';
 import './App.css';
-import { styled } from 'styled-components';
+import styled from 'styled-components'; // 스타일드 컴포넌트를 추가하세요.
 import SubTabs from './components/main/SubTabs';
 import Search from './components/search/Search';
 import ChartWrpper from './components/stastics/ChartWrapper';
@@ -37,10 +37,10 @@ function App() {
 export default App;
 
 const Container = styled.section`
-
   box-sizing: border-box;
+  padding: 0 16px;
   margin: 50px 0;
-  width:100%;
+  width: 100%;
   height: 88%;
   display: flex;
   flex-direction: column;

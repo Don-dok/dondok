@@ -183,7 +183,7 @@ const TheCalendar = () => {
 export default TheCalendar;
 
 const StyledCalender = styled(Calendar)`
-  width: 400px;
+  width: 100%;
   font-size: 12px;
 
   .ant-picker-calendar-header {

@@ -44,7 +44,11 @@ div {
   height: 60px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-top: 10px;
-  width: 395px;
+  width: 100%;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-inline, .ant-menu-light > .ant-menu.ant-menu-root.ant-menu-inline, .ant-menu-light.ant-menu-root.ant-menu-vertical, .ant-menu-light > .ant-menu.ant-menu-root.ant-menu-vertical {
+  width: 100%;
 }
 
 .ant-menu-light.ant-menu-root.ant-menu-inline,
@@ -138,6 +142,9 @@ div {
   background-color: #a1d2f7e8;
 }
 
+
+
+
 .ant-menu-item .ant-menu-item-active:hover {
   background-color: #77bcf0e8;
 }
@@ -190,7 +197,6 @@ div {
 }
 
 .ant-select-show-search {
-  padding-left: 35px;
   padding-right: 5px;
   margin: 25px 0;
 }
@@ -210,18 +216,34 @@ div {
 }
 
 .ant-modal-mask {
-  margin: 0 auto;
-  width: 438px;
   height: 100vh;
   border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 7px;
   overflow: hidden;
+}
+.ant-tabs .ant-tabs-tab .anticon{
+  margin: 0;
+  padding: 0 10px;
+}
+
+
+.ant-tabs-top {
+  width: 100%;
+}
+
+.ant-collapse-item {
+  width:100%;
 }
 
 .ant-modal-root .ant-modal-mask {
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
+
+.ant-modal-root .ant-modal-content{
+  border: 1px solid rgba(0,0,0,.1);
+
+}
+
 
 .App {
   position: relative;
@@ -241,9 +263,13 @@ div {
   background-color: white;
   z-index: 99;
   scroll-behavior: smooth;
-
-
+  resize: horizontal;
+  min-width: 436px;
+  max-width: 1024px;
 }
+
+
+
 
 .App::-webkit-scrollbar {
   overflow: hidden;
@@ -254,28 +280,25 @@ div {
 /* 배경 이미지  */
 
 body {
-
   overflow: hidden;
 }
 
 html {
   background: radial-gradient(ellipse at center, #fffeea 0%, #fffeea 35%, #B7E8EB 100%);
-
 }
 
 
 .dog{
   position: fixed;
-  z-index: 969;
   bottom: calc(5%);
   left: calc(20%);
-  z-index: 9;
+  z-index: 1;
 }
 
 .dog img{
   width: 200px;
   height: 200px;
-
+  z-index: 1;
 }
 
 .ocean {

@@ -177,7 +177,7 @@ export default function TotalCategoryChart() {
             style={{
               position: 'relative',
               margin: 'auto',
-              width: '420px',
+              width: '100%',
               height: '100%',
             }}
           />
@@ -187,8 +187,8 @@ export default function TotalCategoryChart() {
             style={{
               position: 'relative',
               margin: 'auto',
-              width: '400px',
-              height: '400px',
+              width: '100%',
+              height: '100%',
             }}
           />
         </div>
